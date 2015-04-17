@@ -1,0 +1,113 @@
+@import vendor/reset
+@import bourbon
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic)
+
+$base-gutter: 40px
+$header-height: 72px
+
+body
+  background:
+    color: #f6f6f6
+  color: #262626
+  font:
+    family: 'Lato', Helvetica, sans-serif
+    size: 16px
+  line-height: 1.5em
+
+#header
+  background: RGBA(240, 240, 240, 1)
+  height: 64px
+  width: 100%
+  text:
+    align: center
+  line-height: 64px
+
+  h1
+    color: RGBA(61, 206, 243, 1)
+    font:
+      size: 32px
+      weight: 700
+      style: italic
+
+$control-height: 72px
+#control-top
+  background:
+    color: #f0f0f0
+  min-height: $control-height
+  line-height: $control-height
+  margin:
+    bottom: $base-gutter
+  text:
+    align: center
+  width: 100%
+
+#control-bottom
+  background:
+    color: #f0f0f0
+  position: fixed
+  bottom: 0
+  left: 0
+  line-height: $control-height
+  min-height: $control-height
+  text:
+    align: center
+  width: 100%
+
+.control-input
+  display: inline-block
+  font:
+    size: 16px
+  height: 38px
+  padding: 0 1em
+  width: 25%
+
+  &:focus
+    outline: none
+
+$control-button-background-color: #31cef5
+.control-button
+  @include transition(0.3s ease)
+  background:
+    color: $control-button-background-color
+  border:
+    radius: 4px
+  color: white
+  cursor: pointer
+  display: inline-block
+  font:
+    size: 14px
+  height: 38px
+  padding: 0 1em
+  margin: 0 $base-gutter / 8
+  line-height: 38px
+
+  &:hover
+    background:
+      color: darken( $control-button-background-color, 10% )
+
+#wrapper
+  background:
+    color: #f6f6f6
+  margin: 0 auto
+  text:
+    align: center
+  width: 100%
+  overflow:
+    x: hidden
+
+.grid-wrapper
+  background:
+    color: #ededed
+  margin: 0 auto
+  position: relative
+
+.grid-item
+  display: block
+  position: absolute
+  margin: 0 auto
+
+  img
+    display: block
+    height: auto
+    width: 100%
