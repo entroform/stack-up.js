@@ -1,11 +1,13 @@
 # stackgrid.adem.js
 # adwm.co
+# https://github.com/heyadem/stackgrid.adem.js
 
 (($) ->
 
   $.stackgrid = (container, items, options) ->
 
     $.extend $.stackgrid.config, options
+
     $window = $ window
     $document = $ document
 
@@ -208,7 +210,7 @@
     # End plugin.
     return
 
-  # Config
+  # Configuration.
   $.stackgrid.config =
     container_selector: undefined
     item_selector: undefined
