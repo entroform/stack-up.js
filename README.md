@@ -24,7 +24,7 @@ First, include stackgrid.adem.js in your project:
 ```
 
 Make sure all the contents inside the grif are fully loaded before initializing stackgrid,
-especially if it contain images. This is to make sure stackgrid calculates the right height before plotting.
+especially if it contain any image(s). This is to make sure stackgrid calculates the right height before plotting.
 
 
 ```javascript
