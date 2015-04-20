@@ -131,7 +131,7 @@
         grid.container.width = ($.stackgrid.config.column_width + $.stackgrid.config.gutter) * grid.number_of_columns
       height = grid.container.height + $.stackgrid.config.gutter
       width = grid.container.width + $.stackgrid.config.gutter
-      $.stackgrid.config.scale grid.$container, height, width, callback
+      $.stackgrid.config.scale grid.$container, width, height, callback
       return
 
     grid.paint = ->
@@ -226,7 +226,7 @@
         top: top
       callback()
       return
-    scale: (element, height, width, callback) ->
+    scale: (element, width, height, callback) ->
       element.css
         height: height
         width: width
