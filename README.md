@@ -114,7 +114,7 @@ $.stackgrid.config.column_width = 500;
 
 // When you are modifying the grid-item's dimensions or if you remove a grid-item,
 // make sure to call reset before re-stacking.
-$.stackgrid.reset()
+$.stackgrid.reset();
 
 // Restack the grid.
 $.stackgrid.restack();
