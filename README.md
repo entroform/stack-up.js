@@ -99,7 +99,6 @@ $window.on('load', function(){
   $.stackgrid.reset()
 
   // Restack the grid.
-  // (Recalculate each item's positions)
   $.stackgrid.restack();
 
   // You don't need to use reset for other grid configurations that does
