@@ -2,7 +2,7 @@
 
 A very simple and highly customizable jQuery plugin for sorting and stacking stuff in a nice and efficient way!
 
-Click here for a demo:
+Click below for a demo:
 
 http://heyadem.github.io/stackgrid/
 
