@@ -34,7 +34,7 @@ especially if it contain any image(s). This is to make sure stackgrid calculates
 var $window = $(window);
 $window.on('load', function(){
 
-  // This is all it's needed to start!
+  // This is all it needs to work!
   // The first two arguments are for the container selector and the item selector.
   $.stackgrid('#grid-container', '.grid-item');
 
