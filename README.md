@@ -2,7 +2,7 @@
 
 A very simple and highly customizable jQuery plugin for sorting and stacking stuff in a nice and efficient way!
 Click here for a demo:
-http://heyadem.github.io/stackgrid.adem.js/
+http://heyadem.github.io/stackgrid/
 
 ## Getting started.
 
@@ -87,7 +87,7 @@ $window.on('load', function(){
   // Once you're done setting the options,
   // initialize stackgrid!
   // The first two arguments take in the container selector and the item selector.
-  $.stackgrid( '#grid-container', '.grid-item', options);
+  $.stackgrid('#grid-container', '.grid-item', options);
 
   // Modify config directly:
   $.stackgrid.config.column_width = 500;
