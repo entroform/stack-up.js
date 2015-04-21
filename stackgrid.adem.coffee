@@ -219,7 +219,7 @@
     is_fluid: true
     is_optimized: true
     number_of_columns: 4
-    resize_delay: 100
+    resize_delay: 300
     move: (element, left, top, callback) ->
       element.css
         left: left
