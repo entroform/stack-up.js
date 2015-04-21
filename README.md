@@ -71,7 +71,7 @@ $.stackgrid.config = {
   number_of_columns: 4,
 
   // Timeout delay to call the resize complete function.
-  resize_delay: 100,
+  resize_delay: 300,
 
   // You can customize when and how each item is moved!
   // Make sure to use jQuery stop() function if you decide to
@@ -114,7 +114,7 @@ $.stackgrid.config.column_width = 500;
 
 // When you are modifying the grid-item's dimensions or if you remove a grid-item,
 // make sure to call reset before re-stacking.
-$.stackgrid.reset()
+$.stackgrid.reset();
 
 // Restack the grid.
 $.stackgrid.restack();
@@ -133,4 +133,3 @@ $.stackgrid.append($item);
 ```
 
 Enjoy!
-
