@@ -23,8 +23,9 @@ First, include stackgrid.adem.js in your project:
 <script src="js/stackgrid.adem.js"></script>
 ```
 
-Make sure all the contents inside the grif are fully loaded before initializing stackgrid,
-especially if it contain any image(s). This is to make sure stackgrid calculates the right height before plotting.
+Make sure all the contents inside are fully loaded before initializing stackgrid,
+especially if it contain any image(s).
+This is to make sure stackgrid calculates the right height before plotting.
 
 
 ```javascript
@@ -35,22 +36,53 @@ var $window = $(window);
 $window.on('load', function(){
 
   // This is all it needs to work!
+  var stackgrid = new $.stackgrid;
   // The first two arguments are for the container selector and the item selector.
-  $.stackgrid('#grid-container', '.grid-item');
+  stackgrid.initialize('#grid-container', '.grid-item');
 
 });
 
 ```
 
-## Advanced options.
+## Config.
 
 Please refer to the following if you want to further configurate stackgrid.
+
+## Appending
+
+You can easily append new content!
+
+```javascript
+
+var stackgrid = new $.stackgrid;
+stackgrid.initialize('#grid-container', '.grid-item');
+
+// Create new grid-item.
+item = $("<div class=\"grid-item\"> I'm a new grid item. </div>");
+item.appendTo("#grid-container");
+
+// Append to stackgrid!
+stackgrid.append(item);
+
+```
+
+## Changing and re-stacking.
 
 ```javascript
 
 // Begin configurating stackgrid.
 // The options listed here are default.
-$.stackgrid.config = {
+stackgrid.config.column_width = 400;
+stackgrid.reset();
+stackgrid.restack();
+
+```
+
+## Config.
+
+```javascript
+
+stackgrid.config = {
 
   // Your column width!
   column_width: 320,
@@ -96,37 +128,7 @@ $.stackgrid.config = {
     });
     callback();
   }
-
 };
-
-// You can overwrite config options here,
-// or you can modify them directly from $.stackgrid.config
-options = {
-  column_width: 400
-}
-
-// Initialize stackgrid!
-// The first two arguments are for the container selector and the item selector.
-$.stackgrid('#grid-container', '.grid-item', options);
-
-// You can modify config directly:
-$.stackgrid.config.column_width = 500;
-
-// When you are modifying the grid-item's dimensions or if you remove a grid-item,
-// make sure to call reset before re-stacking.
-$.stackgrid.reset();
-
-// Restack the grid.
-$.stackgrid.restack();
-
-// You don't need to use reset for other grid configurations that does
-// not involve the dimensions of the grid item.
-$.stackgrid.config.is_fluid = false;
-$.stackgrid.restack();
-
-// You can also append a new item into the grid without restacking.
-$item = $("<div class='grid-item'>I'm a new grid item!</div>");
-$.stackgrid.append($item);
 
 // That's it! :)
 
