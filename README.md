@@ -23,16 +23,17 @@ First, include stackgrid.adem.js in your project.
 <script src="js/stackgrid.adem.js"></script>
 ```
 
-Make sure all the contents inside the grid are fully loaded before initializing stackgrid
-to ensure stackgrid calculates the right height before plotting.
+Make sure all the contents inside are fully loaded before initializing stackgrid.
+This is to ensure stackgrid calculates the right height before plotting.
 
 
 ```javascript
 // Create a stackgrid object.
 var stackgrid = new $.stackgrid;
 var options = {
-  ...
+  column_width: 320
 };
+
 // Wrap the initializer inside window on load to
 // make sure to wait until all the grid contents are loaded.
 var $window = $(window);
@@ -48,11 +49,12 @@ $window.on('load', function(){
 ## Appending.
 
 Stackgrid allows you to append a new grid item without
-replotting the whole grid.
+having to replot the whole grid.
 
 ```javascript
 // Create new grid-item.
 item = $("<div class=\"grid-item\"> I'm a new grid item. </div>");
+// Append it to the grid-container.
 item.appendTo("#grid-container");
 // *** If the new content has image(s), make sure it's loaded first before appending!
 // Append to stackgrid!
@@ -67,8 +69,8 @@ stackgrid.config.is_fluid = false;
 stackgrid.restack();
 
 // Certain changes require you to reset the grid.
-// These are changes that affects the dimensions of the grid item or
-// if any of the grid items are removed.
+// These are changes that affect the dimensions of the grid-item or
+// if you remove any of the items.
 stackgrid.config.column_width = 400;
 stackgrid.reset();
 stackgrid.restack();
@@ -80,7 +82,7 @@ stackgrid.restack();
 // The values shown here are the default ones.
 stackgrid.config = {
 
-  // Your column width!
+  // Your column width.
   column_width: 320,
 
   // Adjust spacing in-between grid-items.
@@ -115,7 +117,7 @@ stackgrid.config = {
   },
 
   // This function is used to scale the container containing
-  // the grid items.
+  // the grid-items.
   // The callback function starts the move operations.
   scale: function(element, width, height, callback) {
     element.css({
