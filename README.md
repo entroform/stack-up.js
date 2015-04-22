@@ -54,7 +54,7 @@ replotting the whole grid.
 // Create new grid-item.
 item = $("<div class=\"grid-item\"> I'm a new grid item. </div>");
 item.appendTo("#grid-container");
-
+// *** If the new content has image(s), make sure it's loaded first before appending!
 // Append to stackgrid!
 stackgrid.append(item);
 ```
