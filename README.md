@@ -1,6 +1,6 @@
 # stackgrid.adem.js
 
-A very simple and highly customizable jQuery plugin for sorting and stacking stuff in a nice and efficient way!
+A very simple and highly customizable jQuery plugin for sorting and stacking stuff in a nice way!
 
 Click below for a demo:
 
@@ -8,7 +8,7 @@ http://heyadem.github.io/stackgrid/
 
 ## Getting started.
 
-First, include stackgrid.adem.js in your project:
+First, include stackgrid.adem.js in your project.
 
 ```html
 <!-- Example Grid HTML -->
@@ -23,65 +23,61 @@ First, include stackgrid.adem.js in your project:
 <script src="js/stackgrid.adem.js"></script>
 ```
 
-Make sure all the contents inside are fully loaded before initializing stackgrid,
-especially if it contain any image(s).
-This is to make sure stackgrid calculates the right height before plotting.
+Make sure all the contents inside the grid are fully loaded before initializing stackgrid
+to ensure stackgrid calculates the right height before plotting.
 
 
 ```javascript
-
+// Create a stackgrid object.
+var stackgrid = new $.stackgrid;
+var options = {
+  ...
+};
 // Wrap the initializer inside window on load to
 // make sure to wait until all the grid contents are loaded.
 var $window = $(window);
 $window.on('load', function(){
 
-  // This is all it needs to work!
-  var stackgrid = new $.stackgrid;
+  // Initialize stackgrid!
   // The first two arguments are for the container selector and the item selector.
-  stackgrid.initialize('#grid-container', '.grid-item');
+  stackgrid.initialize('#grid-container', '.grid-item', options);
 
 });
-
 ```
 
-## Config.
+## Appending.
 
-Please refer to the following if you want to further configurate stackgrid.
-
-## Appending
-
-You can easily append new content!
+Stackgrid allows you to append a new grid item without
+replotting the whole grid.
 
 ```javascript
-
-var stackgrid = new $.stackgrid;
-stackgrid.initialize('#grid-container', '.grid-item');
-
 // Create new grid-item.
 item = $("<div class=\"grid-item\"> I'm a new grid item. </div>");
 item.appendTo("#grid-container");
 
 // Append to stackgrid!
 stackgrid.append(item);
-
 ```
 
-## Changing and re-stacking.
+## Re-stacking.
 
 ```javascript
+// Restack the grid to apply your config changes.
+stackgrid.config.is_fluid = false;
+stackgrid.restack();
 
-// Begin configurating stackgrid.
-// The options listed here are default.
+// Certain changes require you to reset the grid.
+// These are changes that affects the dimensions of the grid item or
+// if any of the grid items are removed.
 stackgrid.config.column_width = 400;
 stackgrid.reset();
 stackgrid.restack();
-
 ```
 
 ## Config.
 
 ```javascript
-
+// The values shown here are the default ones.
 stackgrid.config = {
 
   // Your column width!
@@ -129,9 +125,6 @@ stackgrid.config = {
     callback();
   }
 };
-
-// That's it! :)
-
 ```
 
 Enjoy!
