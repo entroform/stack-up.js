@@ -1,6 +1,6 @@
 # stackgrid.adem.js
 
-A very simple and highly customizable jQuery plugin for sorting and stacking stuff in a nice way!
+A very simple and highly customizable jQuery plugin for stacking stuff in a nice way!
 
 Click below for a demo:
 
