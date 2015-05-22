@@ -6,7 +6,7 @@ Click below for a demo:
 
 http://heyadem.github.io/stackgrid/
 
-## Getting started.
+## Getting started
 
 First, include stackgrid.adem.js in your project.
 
@@ -35,24 +35,10 @@ stackgrid.config.column_width = 240;
 window.onload = function(){
   stackgrid.initialize('.grid-container', '.grid-item');
 };
+
 ```
 
-## Appending.
-
-Stackgrid allows you to append a new grid item without
-having to replot the whole grid.
-
-```javascript
-// Create new grid-item.
-item = $("<div class=\"grid-item\"> I'm a new grid item. </div>");
-// Append it to the grid-container.
-item.appendTo("#grid-container");
-// *** If the new content has image(s), make sure it's loaded first before appending!
-// Append to stackgrid!
-stackgrid.append(item);
-```
-
-## Re-stacking.
+## Advanced
 
 ```javascript
 // Restack the grid to apply your config changes.
