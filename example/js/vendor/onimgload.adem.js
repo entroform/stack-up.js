@@ -1,0 +1,1 @@
+(function(){!function(){return this.onimgload=function(t,i){var n,h;return n=new Image,n.src=t,h={url:t,height:n.height,width:n.width,ratio:n.width/n.height},n.onload=function(){return i(h)},h}}()}).call(this);

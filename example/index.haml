@@ -1,0 +1,54 @@
+!!!
+%html
+  %head
+    %title stackgrid.adem.js
+    %meta{charset: 'utf-8'}
+
+    %link{href: 'css/style.css', rel: 'stylesheet'}
+
+  %body
+    #header
+      %h1
+        %a{href: 'https://github.com/heyadem/stackgrid.adem.js', target: '_blank'} stackgrid.adem.js
+
+    #control
+      .control-button.-one Small
+      .control-button.-two Medium
+      .control-button.-three Large
+      .control-button.-four Gutter On
+      .control-button.-five Gutter Off
+      .control-button.-six Optimized
+      .control-button.-seven Ordinal
+      .control-button.-eight Fluid
+      .control-button.-nine Set columns
+      .control-button.-ten Clear
+      .control-button.-eleven Width 320
+      .control-button.-twelve Width 200
+      .control-button.-thirteen width 120
+
+    #content
+      .grid-container
+        .grid-item
+          %img{src: 'img/short.jpg', alt: ''}
+        .grid-item
+          %img{src: 'img/tall.jpg', alt: ''}
+        .grid-item
+          %img{src: 'img/medium.jpg', alt: ''}
+        .grid-item
+          %img{src: 'img/tall.jpg', alt: ''}
+        .grid-item
+          %img{src: 'img/short.jpg', alt: ''}
+        .grid-item
+          %img{src: 'img/medium.jpg', alt: ''}
+        .grid-item
+          %img{src: 'img/medium.jpg', alt: ''}
+        .grid-item
+          %img{src: 'img/short.jpg', alt: ''}
+        .grid-item
+          %img{src: 'img/medium.jpg', alt: ''}
+
+    // scripts
+    %script{src: '../stackgrid.adem.js'}
+    %script{src: 'js/vendor/velocity.js'}
+    %script{src: 'js/vendor/onimgload.adem.js'}
+    %script{src: 'js/example.js'}

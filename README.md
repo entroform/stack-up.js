@@ -1,6 +1,6 @@
 # stackgrid.adem.js
 
-A very simple and highly customizable jQuery plugin for stacking stuff.
+A very simple stacking javascript plugin.
 
 Click below for a demo:
 
@@ -12,19 +12,18 @@ First, include stackgrid.adem.js in your project.
 
 ```html
 <!-- Example Grid HTML -->
-<div id="grid-container">
+<div class="grid-container">
   <div class="grid-item">...</div>
   <div class="grid-item">...</div>
   <div class="grid-item">...</div>
 </div>
 
-<!-- Don't forget to include jQuery! -->
-<script src="js/jquery.js"></script>
 <script src="js/stackgrid.adem.js"></script>
 ```
 
-Make sure all the contents inside are fully loaded before initializing stackgrid.
-This is to ensure stackgrid calculates the right height before plotting.
+Make sure all the contents inside the grid are fully loaded before initializing stackgrid,
+especially if it contain any image(s).
+This is to make sure stackgrid calculates the right height before plotting.
 
 
 ```javascript
@@ -36,14 +35,14 @@ var options = {
 
 // Wrap the initializer inside window on load to
 // make sure to wait until all the grid contents are loaded.
-var $window = $(window);
-$window.on('load', function(){
+window.onload = function(){
 
-  // Initialize stackgrid!
-  // The first two arguments are for the container selector and the item selector.
-  stackgrid.initialize('#grid-container', '.grid-item', options);
+  // This is all it needs to work!
+  stackgrid = new Stackgrid;
+  stackgrid.config.column_width = 240;
+  stackgrid.initialize('.grid-container', '.grid-item');
 
-});
+};
 ```
 
 ## Appending.
@@ -76,57 +75,64 @@ stackgrid.reset();
 stackgrid.restack();
 ```
 
-## Config.
+// Begin configurating stackgrid.
+// The options listed here are default.
 
-```javascript
-// The values shown here are the default ones.
-stackgrid.config = {
+stackgrid.config.column_width = 320;
+stackgrid.config.gutter = 20;
+stackgrid.config.is_fluid = true;
+stackgrid.config.is_optimized = true;
+stackgrid.config.number_of_columns = true;
+stackgrid.config.resize_debounce_delay = 400;
 
-  // Your column width.
-  column_width: 320,
+// You can customize when and how each item is moved!
+// Make sure to use jQuery stop() function if you decide to
+// animate it.
+// Where you place the callback determines
+// when the next move operation is called.
 
-  // Adjust spacing in-between grid-items.
-  gutter: 20,
+stackgrid.config.move: function(item, left, top, callback) {
+  item.style.left = left + "px";
+  item.style.top = top + "px";
+  callback();
+}
 
-  // Set this as true to let stackgrid automatically
-  // determine the number of columns based on the
-  // viewport's width.
-  is_fluid: true,
+// This function is used to scale the container containing
+// the grid items.
+// The callback function starts the move operations.
+stackgrid.config.scale: function(container, width, height, callback) {
+  container.style.width = width + "px";
+  container.style.height = height + "px";
+  callback();
+}
 
-  // Set this as true to sort the grid in an vertically optimal way.
-  is_optimized: true,
+// The first two arguments are for the container selector and the item selector.
+stackgrid.initialize('.grid-container', '.grid-item');
 
-  // If is_fluid is false, it will
-  // use this as the default number of columns.
-  number_of_columns: 4,
+// You can modify config directly:
+stackgrid.config.column_width = 500;
 
-  // Timeout delay to call the resize complete function.
-  resize_delay: 300,
+// When you are modifying the grid-item's dimensions or if you remove a grid-item,
+// make sure to call reset before re-stacking.
+stackgrid.reset();
 
-  // You can customize when and how each item is moved!
-  // Make sure to use jQuery stop() function if you decide to
-  // animate it.
-  // Where you place the callback determines
-  // when the next move operation is called.
-  move: function(element, left, top, callback) {
-    element.css({
-      left: left,
-      top: top
-    )};
-    callback();
-  },
+// Restack the grid.
+stackgrid.restack();
 
-  // This function is used to scale the container containing
-  // the grid-items.
-  // The callback function starts the move operations.
-  scale: function(element, width, height, callback) {
-    element.css({
-      height: height,
-      width: width
-    });
-    callback();
-  }
-};
+// You don't need to use reset for other grid configurations that does
+// not involve the dimensions of the grid item.
+stackgrid.config.is_fluid = false;
+stackgrid.restack();
+
+// You can also append a new item into the grid without restacking.
+var grid_container = document.getElementByClass('grid-container');
+var grid_item = document.createElement('div');
+grid_item.setAttribute('class', 'grid-item');
+grid_container.appendChild(grid_item);
+stackgrid.append(grid_item);
+
+// That's it! :)
+
 ```
 
 

@@ -1,0 +1,92 @@
+@import vendor/reset
+@import bourbon
+
+$background-color: white
+$base-gutter: 40px
+body
+  background: $background-color
+  font:
+    family: 'Lato', sans-serif
+  text:
+    align: center
+
+a:link,
+a:visited
+  text:
+    decoration: none
+
+$header-height: 96px
+$header-background-color: #F2FBFF
+
+#header
+  background:
+    color: $header-background-color
+  height: $header-height
+  line-height: $header-height
+  width: 100%
+  z-index: 10
+
+  h1
+    line-height: $header-height
+
+  a:link,
+  a:visited
+    display: inline-block
+    color: #80D4FF
+    font:
+      size: 42px
+    line-height: $header-height
+
+#control
+  background:
+    color: #80D4FF
+  text:
+    align: center
+  font:
+    size: 0
+  width: 100%
+  z-index: 20
+
+#content
+  margin: $base-gutter 0
+  height: auto
+  overflow: hidden
+  width: 100%
+
+.grid-container
+  background:
+    color: #F2FBFF
+  position: relative
+  margin: 0 auto
+
+.grid-item
+  display: inline-block
+  position: absolute
+  font:
+    size: 0
+
+.grid-item img
+  cursor: pointer
+  display: block
+  width: 100%
+
+.control-button
+  @include transition( 0.1s ease )
+  color: white
+  cursor: pointer
+  background:
+    color: #80D4FF
+  display: inline-block
+  font:
+    size: 16px
+    weight: 300
+  letter-spacing: 1px
+  padding: 1em
+
+  &:hover
+    background:
+      color: #40BFFF
+
+  &:active
+    background:
+      color: #00AAFF

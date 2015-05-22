@@ -1,2 +1,4 @@
-
 *.codekit
+.DS_Store
+.sass-cache/
+min/
