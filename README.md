@@ -73,7 +73,6 @@ stackgrid.restack();
 stackgrid.config.column_width = 400;
 stackgrid.reset();
 stackgrid.restack();
-```
 
 // Begin configurating stackgrid.
 // The options listed here are default.
