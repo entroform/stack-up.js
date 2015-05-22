@@ -27,19 +27,14 @@ This is to make sure stackgrid calculates the right height before plotting.
 
 
 ```javascript
-// Create a stackgrid object.
-var stackgrid = new $.stackgrid;
-var options = {
-  column_width: 320
-};
+stackgrid = new Stackgrid;
+stackgrid.config.column_width = 240;
 
 // Wrap the initializer inside window on load to
 // make sure to wait until all the grid contents are loaded.
 window.onload = function(){
 
   // This is all it needs to work!
-  stackgrid = new Stackgrid;
-  stackgrid.config.column_width = 240;
   stackgrid.initialize('.grid-container', '.grid-item');
 
 };
