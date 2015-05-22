@@ -1,6 +1,6 @@
 # stackgrid.adem.js
 
-A very simple stacking javascript plugin.
+A very simple javascript stacking plugin.
 
 Click below for a demo:
 
