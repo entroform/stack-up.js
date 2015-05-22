@@ -33,10 +33,7 @@ stackgrid.config.column_width = 240;
 // Wrap the initializer inside window on load to
 // make sure to wait until all the grid contents are loaded.
 window.onload = function(){
-
-  // This is all it needs to work!
   stackgrid.initialize('.grid-container', '.grid-item');
-
 };
 ```
 
