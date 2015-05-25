@@ -1,6 +1,6 @@
-# stackgrid.adem.js
-# adwm.co
-# https://github.com/heyadem/stackgrid.adem.js
+# stackgrid.adem.coffee - adwm.co
+# Licensed under the MIT license - http://opensource.org/licenses/MIT
+# Copyright (C) 2015 Andrew Prasetya
 
 (->
 
