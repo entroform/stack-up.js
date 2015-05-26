@@ -48,13 +48,15 @@ grid.append = (url) ->
   onimgload url, ->
     grid.$container.appendChild grid_item
     grid.update()
-    stackgrid.append grid_item
+    Velocity grid_item, scale: 0, 1, stackgrid.append grid_item
+    Velocity grid_item, scale: 1, 200
   return
 
+$buttons = document.getElementsByClassName 'control-button'
+$button.addEventListener 'click', ( (event) -> event.preventDefault() ) for $button in $buttons
 buttons = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen']
 button = {}
-for i in buttons
-  button[i] = document.querySelector ".control-button.-#{i}"
+button[i] = document.querySelector ".control-button.-#{i}" for i in buttons
 
 button.one.onclick = (-> grid.append 'img/short.jpg' )
 button.two.onclick = (-> grid.append 'img/medium.jpg' )

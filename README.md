@@ -1,41 +1,39 @@
 # stackgrid.adem.js
 
-A very simple javascript stacking plugin.
+A very simple and fast javascript stacking plugin.
 
-Click below for a demo:
-
-http://heyadem.github.io/stackgrid/
+[Click Here](http://heyadem.github.io/stackgrid/) for a demo.
 
 ## Getting started
 
-First, include stackgrid.adem.js in your project.
+First, include _stackgrid.adem.js_ in your project.
 
 ```html
-<!-- Example Grid HTML -->
+<!-- Example HTML -->
 <div class="grid-container">
   <div class="grid-item">...</div>
   <div class="grid-item">...</div>
   <div class="grid-item">...</div>
 </div>
 
+<!-- Scripts -->
 <script src="js/stackgrid.adem.js"></script>
 ```
 
-Make sure all the contents inside the grid are fully loaded before initializing stackgrid,
-especially if it contain any image(s).
+Make sure all the contents inside are fully loaded before initializing stackgrid.
 This is to make sure stackgrid calculates the right height before plotting.
 
-
 ```javascript
-stackgrid = new Stackgrid;
+var stackgrid = new Stackgrid;
+
+// Config your stackgrid options here.
 stackgrid.config.column_width = 240;
 
 // Wrap the initializer inside window on load to
-// make sure to wait until all the grid contents are loaded.
-window.onload = function(){
+// make sure to wait until everything is loaded.
+window.onload = function() {
   stackgrid.initialize('.grid-container', '.grid-item');
 };
-
 ```
 
 ## Advanced

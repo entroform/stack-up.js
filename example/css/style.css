@@ -2,6 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900,400italic);
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -47,7 +48,8 @@ table {
 
 body {
   background: white;
-  font-family: "Lato", sans-serif;
+  font-family: "Lato", helvetica, arial, sans-serif;
+  font-size: 16px;
   text-align: center; }
 
 a:link,
@@ -89,27 +91,29 @@ a:visited {
 
 .grid-item {
   display: inline-block;
+  font-size: 0;
+  left: 0;
   position: absolute;
-  font-size: 0; }
+  top: 0; }
 
 .grid-item img {
   cursor: pointer;
   display: block;
   width: 100%; }
 
-.control-button {
+a.control-button {
   -webkit-transition: 0.1s ease;
   -moz-transition: 0.1s ease;
   transition: 0.1s ease;
+  background-color: #80D4FF;
   color: white;
   cursor: pointer;
-  background-color: #80D4FF;
   display: inline-block;
   font-size: 16px;
   font-weight: 300;
   letter-spacing: 1px;
   padding: 1em; }
-  .control-button:hover {
+  a.control-button:hover {
     background-color: #40BFFF; }
-  .control-button:active {
+  a.control-button:active {
     background-color: #00AAFF; }

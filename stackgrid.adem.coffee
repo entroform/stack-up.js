@@ -126,7 +126,6 @@
       grid.scale_container ->
         for item, index in grid.items
           callback = ->
-
           stackgrid.config.move item[0], item[2], item[3], callback
       return
 
