@@ -12,7 +12,6 @@ window.onload = ->
       queue: false
       duration: 200,
       callback
-
   stackgrid.config.scale = (container, width, height, callback) ->
     Velocity container,
       height: height
@@ -20,7 +19,6 @@ window.onload = ->
       queue: false
       duration: 200,
       callback
-
   stackgrid.initialize '.grid-container', '.grid-item'
   return
 
@@ -28,12 +26,12 @@ grid =
   $container: undefined
   $items: undefined
 
-grid.update = ->
-  grid.$container = document.querySelector '.grid-container'
-  grid.$items = document.querySelectorAll '.grid-item'
-  item.addEventListener 'click', grid.removeItem for item in grid.$items
+(grid.update = ->
+  @$container = document.querySelector '.grid-container'
+  @$items = document.querySelectorAll '.grid-item'
+  item.addEventListener 'click', grid.removeItem for item in @$items
   return
-grid.update()
+)()
 
 grid.removeItem = ->
   grid.$container.removeChild this
@@ -45,9 +43,9 @@ grid.append = (url) ->
   gridItem = document.createElement 'div'
   gridItem.setAttribute 'class', 'grid-item'
   gridItem.innerHTML =  "<img src=\"#{url}\" alt=\"\">"
-  onimgload url, ->
-    grid.$container.appendChild gridItem
-    grid.update()
+  onimgload url, =>
+    @$container.appendChild gridItem
+    @update()
     Velocity gridItem, scale: 0, 1, ->
       stackgrid.reset()
       stackgrid.restack()

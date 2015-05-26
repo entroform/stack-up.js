@@ -76,6 +76,8 @@
 
     _grid.stack = ->
       @updateNumberOfColumns()
+      _grid.container.height = 0
+      _grid.columnPointer = 0
       _layout[stackgrid.config.layout].setup()
       _layout[stackgrid.config.layout].loop() if @items.length > 0
       @plot()
@@ -159,8 +161,6 @@
     stackgrid.reset = ->
       _grid.container = width: 0, height: 0
       _grid.items = []
-      _grid.container.height = 0
-      _grid.columnPointer = 0
       _grid.updateSelectors()
       _grid.updateItems()
       return
