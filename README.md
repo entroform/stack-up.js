@@ -56,7 +56,7 @@ stackgrid.restack();
 stackgrid.config.column_width = 320;
 stackgrid.config.gutter = 20;
 stackgrid.config.is_fluid = true;
-stackgrid.config.is_optimized = true;
+stackgrid.config.layout = 'ordinal';
 stackgrid.config.number_of_columns = true;
 stackgrid.config.resize_debounce_delay = 400;
 
