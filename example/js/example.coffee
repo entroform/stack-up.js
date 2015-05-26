@@ -1,10 +1,10 @@
 stackgrid = new Stackgrid
 
 window.onload = ->
-  stackgrid.config.column_width = 220
+  stackgrid.config.columnWidth = 220
   stackgrid.config.gutter = 20
-  stackgrid.config.is_fluid = false
-
+  stackgrid.config.isFluid = false
+  grid.update()
   stackgrid.config.move = (item, left, top, callback) ->
     Velocity item,
       left: left
@@ -28,28 +28,30 @@ grid =
   $container: undefined
   $items: undefined
 
-grid.remove_item = ->
+grid.update = ->
+  grid.$container = document.querySelector '.grid-container'
+  grid.$items = document.querySelectorAll '.grid-item'
+  item.addEventListener 'click', grid.removeItem for item in grid.$items
+  return
+grid.update()
+
+grid.removeItem = ->
   grid.$container.removeChild this
   stackgrid.reset()
   stackgrid.restack()
   return
 
-(grid.update = ->
-  grid.$container = document.querySelector '.grid-container'
-  grid.$items = document.querySelectorAll '.grid-item'
-  item.addEventListener 'click', grid.remove_item for item in grid.$items
-  return
-)()
-
 grid.append = (url) ->
-  grid_item = document.createElement 'div'
-  grid_item.setAttribute 'class', 'grid-item'
-  grid_item.innerHTML =  "<img src=\"#{url}\" alt=\"\">"
+  gridItem = document.createElement 'div'
+  gridItem.setAttribute 'class', 'grid-item'
+  gridItem.innerHTML =  "<img src=\"#{url}\" alt=\"\">"
   onimgload url, ->
-    grid.$container.appendChild grid_item
+    grid.$container.appendChild gridItem
     grid.update()
-    Velocity grid_item, scale: 0, 1, stackgrid.append grid_item
-    Velocity grid_item, scale: 1, 200
+    Velocity gridItem, scale: 0, 1, ->
+      stackgrid.reset()
+      stackgrid.restack()
+    Velocity gridItem, scale: 1, 200
   return
 
 $buttons = document.getElementsByClassName 'control-button'
@@ -73,22 +75,22 @@ button.five.onclick = ->
   return
 
 button.six.onclick = ->
-  stackgrid.config.is_optimized = true
+  stackgrid.config.layout = 'ordinal'
   stackgrid.restack()
   return
 
 button.seven.onclick = ->
-  stackgrid.config.is_optimized = false
+  stackgrid.config.layout = 'optimized'
   stackgrid.restack()
   return
 
 button.eight.onclick = ->
-  stackgrid.config.is_fluid = true
+  stackgrid.config.isFluid = true
   stackgrid.restack()
   return
 
 button.nine.onclick = ->
-  stackgrid.config.is_fluid = false
+  stackgrid.config.isFluid = false
   stackgrid.restack()
   return
 
@@ -99,19 +101,19 @@ button.ten.onclick = ->
   return
 
 button.eleven.onclick = ->
-  stackgrid.config.column_width = 320
+  stackgrid.config.columnWidth = 320
   stackgrid.reset()
   stackgrid.restack()
   return
 
 button.twelve.onclick = ->
-  stackgrid.config.column_width = 220
+  stackgrid.config.columnWidth = 220
   stackgrid.reset()
   stackgrid.restack()
   return
 
 button.thirteen.onclick = ->
-  stackgrid.config.column_width = 120
+  stackgrid.config.columnWidth = 120
   stackgrid.reset()
   stackgrid.restack()
   return

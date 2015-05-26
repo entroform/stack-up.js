@@ -4,168 +4,132 @@
 
 (->
 
-  this.Stackgrid = ->
+  @Stackgrid = ->
 
-    viewport =
-      height: 0
-      width: 0
-      is_resizing: false
-      resizing: undefined
+    _viewport = height: 0, width: 0
 
-    (viewport.update = ->
-      viewport.height = window.innerHeight
-      viewport.width = window.innerWidth
+    (_viewport.update = ->
+      @height = window.innerHeight
+      @width = window.innerWidth
       return
     )()
 
-    grid =
-      # container element
+    _resize =
+      debounceTimeout: undefined
+      debounce: (fn, delay) ->
+        clearTimeout @debounceTimeout
+        @debounceTimeout = window.setTimeout fn, delay
+        return
+      complete: ->
+
+    _grid =
       $container: undefined
       $items: undefined
-      container_height: 0
-      container_width: 0
+      container: height: 0, width: 0
+      items: [] # [index][item, itemHeight, left, top]
+      columnPointer: 0
+      numberOfColumns: 0
+      updateSelectors: ->
+      updateItems: ->
+      updateNumberOfColumns: ->
+      scaleContainer: ->
+      plot: ->
+      stack: ->
 
-      pointer: 0
-
-      # [index][item, item_height, left, top]
-      items: []
-      number_of_columns: 0
-
-    grid.ordinal =
-      stack: []
-      setup: ->
-        i = 0
-        grid.ordinal.stack = []
-        while i < grid.number_of_columns
-          grid.ordinal.stack[i] = 0
-          i++
-        grid.container_height = 0
-        grid.pointer = 0
-        return
-
-      plot: (item_index) ->
-        # Update left and top value.
-        grid.items[item_index][2] = stackgrid.config.gutter + (stackgrid.config.column_width + stackgrid.config.gutter) * grid.pointer
-        grid.items[item_index][3] = stackgrid.config.gutter + grid.ordinal.stack[grid.pointer]
-        # Update grid stack.
-        grid.ordinal.stack[grid.pointer] += grid.items[item_index][1] + stackgrid.config.gutter
-        # Update container height.
-        if grid.ordinal.stack[grid.pointer] > grid.container_height
-          grid.container_height = grid.ordinal.stack[grid.pointer]
-        # Move column index by 1.
-        grid.pointer++
-        # Reset column index if it exceeds the number of columns.
-        if grid.pointer >= grid.number_of_columns
-          grid.pointer = 0
-        return
-
-      loop: ->
-        i = 0
-        while i < grid.items.length
-          grid.ordinal.plot i
-          i++
-        return
-
-    grid.optimized =
-      stack: []
-      setup: ->
-        grid.optimized.stack = []
-        i = 0
-        while i < grid.number_of_columns
-          grid.optimized.stack[i] = [i, 0]
-          i++
-        grid.container_height = 0
-        grid.pointer = 0
-        return
-
-      plot: (item_index) ->
-        grid.items[item_index][2] = stackgrid.config.gutter + (stackgrid.config.column_width + stackgrid.config.gutter) * grid.optimized.stack[0][0]
-        grid.items[item_index][3] = stackgrid.config.gutter + grid.optimized.stack[0][1]
-        grid.optimized.stack[0][1] += grid.items[item_index][1] + stackgrid.config.gutter
-        if grid.optimized.stack[0][1] > grid.container_height
-          grid.container_height = grid.optimized.stack[0][1]
-        grid.optimized.stack.sort (a, b) ->
-          return a[1] - b[1]
-        grid.pointer++
-        if grid.pointer >= grid.number_of_columns
-          grid.pointer = 0
-        return
-
-      loop: ->
-        i = 0
-        while i < grid.items.length
-          grid.optimized.plot i
-          i++
-        return
-
-    grid.setup = ->
-      stackgrid.reset()
-
-      # Update selectors.
-      grid.$container = document.querySelector stackgrid.config.container_selector
-      grid.$items = document.querySelectorAll "#{stackgrid.config.container_selector} > #{stackgrid.config.item_selector}"
-
-      # Populate grid items.
-      for item, index in grid.$items
-        item.style.width = "#{stackgrid.config.column_width}px"
-        item_height = item.offsetHeight
-        grid.items[index] = [item, item_height, 0, 0]
+    _grid.updateSelectors = ->
+      @$container = document.querySelector stackgrid.config.containerSelector
+      @$items = document.querySelectorAll "#{stackgrid.config.containerSelector} > #{stackgrid.config.itemSelector}"
       return
 
-    grid.scale_container = (callback) ->
-      if grid.items.length < grid.number_of_columns
-        grid.container_width = (stackgrid.config.column_width + stackgrid.config.gutter) * grid.items.length
+    _grid.updateItems = ->
+      if @$items.length > 0
+        for item, index in @$items
+          item.style.width = "#{stackgrid.config.columnWidth}px"
+          itemHeight = item.offsetHeight
+          @items[index] = [item, itemHeight, 0, 0]
+      return
+
+    _grid.updateNumberOfColumns = ->
+      if stackgrid.config.isFluid
+        @numberOfColumns = Math.floor (_viewport.width - stackgrid.config.gutter) / (stackgrid.config.columnWidth + stackgrid.config.gutter)
       else
-        grid.container_width = (stackgrid.config.column_width + stackgrid.config.gutter) * grid.number_of_columns
-      height = grid.container_height + stackgrid.config.gutter
-      width = grid.container_width + stackgrid.config.gutter
-      stackgrid.config.scale grid.$container, width, height, callback
+        @numberOfColumns = stackgrid.config.numberOfColumns
+      @numberOfColumns = @items.length if @numberOfColumns > @items.length
       return
 
-    grid.paint = ->
-      grid.scale_container ->
-        for item, index in grid.items
+    _grid.scaleContainer = (callback) ->
+      if @items.length < @numberOfColumns
+        @container.width = (stackgrid.config.columnWidth + stackgrid.config.gutter) * @items.length
+      else
+        @container.width = (stackgrid.config.columnWidth + stackgrid.config.gutter) * @numberOfColumns
+      height = @container.height + stackgrid.config.gutter
+      width = @container.width + stackgrid.config.gutter
+      stackgrid.config.scale @$container, width, height, callback
+      return
+
+    _grid.plot = ->
+      @scaleContainer =>
+        for item, index in @items
           callback = ->
           stackgrid.config.move item[0], item[2], item[3], callback
       return
 
-    grid.stack = ->
-      # Calculate number of columns if it's set as fluid or not.
-      if stackgrid.config.is_fluid
-        grid.number_of_columns = Math.floor (viewport.width - stackgrid.config.gutter) / (stackgrid.config.column_width + stackgrid.config.gutter)
-      else
-        grid.number_of_columns = stackgrid.config.number_of_columns
-
-      if stackgrid.config.is_optimized
-        grid.optimized.setup()
-        grid.optimized.loop()
-      else
-        grid.ordinal.setup()
-        grid.ordinal.loop()
-
-      grid.paint()
+    _grid.stack = ->
+      @updateNumberOfColumns()
+      _layout[stackgrid.config.layout].setup()
+      _layout[stackgrid.config.layout].loop() if @items.length > 0
+      @plot()
       return
 
-    resize =
-      debounce_timeout: undefined
-      complete: ->
-        grid.stack()
-        return
-      debounce: (fn, delay) ->
-        clearTimeout resize.debounce_timeout
-        resize.debounce_timeout = window.setTimeout fn, delay
-        return
+    _layout =
+      ordinal:
+        stack: []
+        setup: () ->
+          @stack = ([i] = 0 for i in [0.._grid.numberOfColumns - 1])
+          return
+        plot: (itemIndex) ->
+          _grid.items[itemIndex][2] = stackgrid.config.gutter + (stackgrid.config.columnWidth + stackgrid.config.gutter) * _grid.columnPointer
+          _grid.items[itemIndex][3] = stackgrid.config.gutter + @stack[_grid.columnPointer]
+          @stack[_grid.columnPointer] += _grid.items[itemIndex][1] + stackgrid.config.gutter
+          _grid.container.height = @stack[_grid.columnPointer] if @stack[_grid.columnPointer] > _grid.container.height
+          _grid.columnPointer++
+          _grid.columnPointer = 0 if _grid.columnPointer >= _grid.numberOfColumns
+          return
+        loop: ->
+          @plot i for i in [0.._grid.items.length - 1]
+          return
+      optimized:
+        stack: []
+        setup: ->
+          @stack = ([i] = [i, 0] for i in [0.._grid.numberOfColumns - 1])
+          return
+        plot: (itemIndex) ->
+          _grid.items[itemIndex][2] = stackgrid.config.gutter + (stackgrid.config.columnWidth + stackgrid.config.gutter) * @stack[0][0]
+          _grid.items[itemIndex][3] = stackgrid.config.gutter + @stack[0][1]
+          @stack[0][1] += _grid.items[itemIndex][1] + stackgrid.config.gutter
+          _grid.container.height = @stack[0][1] if @stack[0][1] > _grid.container.height
+          @stack.sort ( (a, b) -> return a[1] - b[1] )
+          _grid.columnPointer++
+          _grid.columnPointer = 0 if _grid.columnPointer >= _grid.numberOfColumns
+          return
+        loop: ->
+          @plot i for i in [0.._grid.items.length - 1]
+          return
+
+    _resize.complete = ->
+      _grid.stack()
+      return
 
     stackgrid =
       config:
-        container_selector: undefined
-        item_selector: undefined
-        column_width: 320
+        containerSelector: undefined
+        itemSelector: undefined
+        columnWidth: 320
         gutter: 20
-        is_fluid: false
-        is_optimized: true
-        number_of_columns: 3
-        resize_debounce_delay: 350
+        isFluid: false
+        layout: 'ordinal'
+        numberOfColumns: 4
+        resizeDebounceDelay: 350
 
     stackgrid.config.move = (element, left, top, callback) ->
       element.style.left = "#{left}px"
@@ -180,44 +144,29 @@
       return
 
     stackgrid.initialize = (container, items) ->
-      viewport.update()
-      stackgrid.config.container_selector = container
-      stackgrid.config.item_selector = items
-
-      window.addEventListener 'resize', ->
-        viewport.update()
-        resize.debounce resize.complete, stackgrid.config.resize_debounce_delay
+      _viewport.update()
+      window.addEventListener 'resize', =>
+        _viewport.update()
+        _resize.debounce _resize.complete, @config.resizeDebounceDelay
         return
-
-      grid.setup()
-      grid.stack()
+      @config.containerSelector = container
+      @config.itemSelector = items
+      _grid.updateSelectors()
+      _grid.updateItems()
+      _grid.stack()
       return
 
     stackgrid.reset = ->
-      grid.optimized.stack = []
-      grid.ordinal.stack = []
-      grid.$items = []
-      grid.items = []
+      _grid.container = width: 0, height: 0
+      _grid.items = []
+      _grid.container.height = 0
+      _grid.columnPointer = 0
+      _grid.updateSelectors()
+      _grid.updateItems()
       return
 
     stackgrid.restack = ->
-      grid.setup()
-      grid.stack()
-      return
-
-    stackgrid.append = (item, callback) ->
-      item_index = grid.items.length
-      item.style.width = "#{stackgrid.config.column_width}px"
-      item_height = item.offsetHeight
-      grid.items[item_index] = [item, item_height, 0, 0]
-
-      if stackgrid.config.is_optimized
-        grid.optimized.plot item_index
-      else
-        grid.ordinal.plot item_index
-
-      grid.scale_container ->
-        stackgrid.config.move grid.items[item_index][0], grid.items[item_index][2], grid.items[item_index][3], callback
+      _grid.stack()
       return
 
     return stackgrid

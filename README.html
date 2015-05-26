@@ -1,30 +1,34 @@
-# stackgrid.adem.js
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h1 id="stackgrid.adem.js">stackgrid.adem.js</h1>
 
-A very simple and fast javascript stacking plugin.
+<p>A very simple and fast javascript stacking plugin.</p>
 
-[Click Here](http://heyadem.github.io/stackgrid/) for a demo.
+<p><a href="http://heyadem.github.io/stackgrid/">Click Here</a> for a demo.</p>
 
-## Getting started
+<h2 id="gettingstarted">Getting started</h2>
 
-First, include _stackgrid.adem.js_ in your project.
+<p>First, include <em>stackgrid.adem.js</em> in your project.</p>
 
-```html
-<!-- Example HTML -->
-<div class="grid-container">
-  <div class="grid-item">...</div>
-  <div class="grid-item">...</div>
-  <div class="grid-item">...</div>
-</div>
+<pre><code class="html">&lt;!-- Example HTML --&gt;
+&lt;div class=&quot;grid-container&quot;&gt;
+  &lt;div class=&quot;grid-item&quot;&gt;...&lt;/div&gt;
+  &lt;div class=&quot;grid-item&quot;&gt;...&lt;/div&gt;
+  &lt;div class=&quot;grid-item&quot;&gt;...&lt;/div&gt;
+&lt;/div&gt;
 
-<!-- Scripts -->
-<script src="js/stackgrid.adem.js"></script>
-```
+&lt;!-- Scripts --&gt;
+&lt;script src=&quot;js/stackgrid.adem.js&quot;&gt;&lt;/script&gt;
+</code></pre>
 
-Make sure all the contents inside are fully loaded before initializing stackgrid.
-This is to make sure stackgrid calculates the right height before plotting.
+<p>Make sure all the contents inside are fully loaded before initializing stackgrid.
+This is to make sure stackgrid calculates the right height before plotting.</p>
 
-```javascript
-var stackgrid = new Stackgrid;
+<pre><code class="javascript">var stackgrid = new Stackgrid;
 
 // Config your stackgrid options here.
 stackgrid.config.column_width = 240;
@@ -34,12 +38,11 @@ stackgrid.config.column_width = 240;
 window.onload = function() {
   stackgrid.initialize('.grid-container', '.grid-item');
 };
-```
+</code></pre>
 
-## Advanced
+<h2 id="advanced">Advanced</h2>
 
-```javascript
-// Restack the grid to apply your config changes.
+<pre><code class="javascript">// Restack the grid to apply your config changes.
 stackgrid.config.is_fluid = false;
 stackgrid.restack();
 
@@ -67,8 +70,8 @@ stackgrid.config.resize_debounce_delay = 400;
 // when the next move operation is called.
 
 stackgrid.config.move: function(item, left, top, callback) {
-  item.style.left = left + "px";
-  item.style.top = top + "px";
+  item.style.left = left + &quot;px&quot;;
+  item.style.top = top + &quot;px&quot;;
   callback();
 }
 
@@ -76,8 +79,8 @@ stackgrid.config.move: function(item, left, top, callback) {
 // the grid items.
 // The callback function starts the move operations.
 stackgrid.config.scale: function(container, width, height, callback) {
-  container.style.width = width + "px";
-  container.style.height = height + "px";
+  container.style.width = width + &quot;px&quot;;
+  container.style.height = height + &quot;px&quot;;
   callback();
 }
 
@@ -99,6 +102,9 @@ stackgrid.reset();
 
 // Restack the grid.
 stackgrid.restack();
-```
+</code></pre>
 
-Enjoy!
+<p>Enjoy!</p>
+
+</body>
+</html>

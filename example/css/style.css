@@ -92,9 +92,7 @@ a:visited {
 .grid-item {
   display: inline-block;
   font-size: 0;
-  left: 0;
-  position: absolute;
-  top: 0; }
+  position: absolute; }
 
 .grid-item img {
   cursor: pointer;
