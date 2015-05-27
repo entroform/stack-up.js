@@ -20,6 +20,22 @@ First, include _stackgrid.adem.js_ in your project.
 <script src="js/stackgrid.adem.js"></script>
 ```
 
+### Minimum CSS requirements
+
+```css
+#grid-container {
+  position: relative;
+}
+
+.grid-item {
+  position: absolute;
+}
+
+.grid-item img {
+  width: 100%;
+}
+```
+
 Make sure all the contents inside are fully loaded before initializing stackgrid.
 This is to make sure stackgrid calculates the right height before plotting.
 
