@@ -26,13 +26,17 @@ This is to make sure stackgrid calculates the right height before plotting.
 ```javascript
 var stackgrid = new Stackgrid;
 
-// Config your stackgrid options here.
+// Configurate your stackgrid options here.
 stackgrid.config.column_width = 240;
 
 // One way to make sure everything is loaded is
 // to wrap the initializer inside window onload.
 window.onload = function() {
+
+  // The initializer takes in two arguements:
+  // the grid container selector, and the grid items selector
   stackgrid.initialize('#grid-container', '.grid-item');
+
 };
 ```
 
@@ -44,8 +48,9 @@ The values shown here are the default values.
 stackgrid.config.columnWidth = 320;
 stackgrid.config.gutter = 20;
 stackgrid.config.isFluid = false;
-// Currently there aer two layout options: 'ordinal', and 'optimized'
-stackgrid.config.layout = 'optimized';
+
+// Currently there are two layout options: "ordinal", and "optimized"
+stackgrid.config.layout = "optimized";
 stackgrid.config.numberOfColumns = 4;
 stackgrid.config.resizeDebounceDelay = 350;
 
@@ -60,6 +65,7 @@ stackgrid.config.moveItem: function(item, left, top, callback) {
 stackgrid.config.scaleContainer: function(container, width, height, callback) {
   container.style.width = width + "px";
   container.style.height = height + "px";
+  // The callback function is important!
   callback();
 }
 ```
@@ -71,7 +77,7 @@ you will have to call the _restack_ method.
 
 ```javascript
 stackgrid.config.layout = 'ordinal';
-stackgrid.restack()
+stackgrid.restack();
 ```
 
 This won't work if you change something that affects the size of the grid item.
@@ -79,7 +85,7 @@ for that you will have to use the _reset_ method.
 
 ```javascript
 stackgrid.config.columnWidth = 220;
-stackgrid.reset()
+stackgrid.reset();
 ```
 
 You will also need to use the reset method if you add or remove a grid item.
@@ -109,6 +115,6 @@ That's it!
 
 ## License
 
-Stackgrid is licensed under the MIT license - [http://opensource.org/licenses/MIT]
+Stackgrid is licensed under the MIT license - http://opensource.org/licenses/MIT
 
 Copyright (C) 2015 Andrew Prasetya
