@@ -109,5 +109,6 @@ That's it!
 
 ## License
 
-Stackgrid is licensed under the MIT license - (http://opensource.org/licenses/MIT)
+Stackgrid is licensed under the MIT license - [http://opensource.org/licenses/MIT]
+
 Copyright (C) 2015 Andrew Prasetya
