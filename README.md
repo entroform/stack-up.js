@@ -1,6 +1,6 @@
 # stackgrid.adem.js
 
-A very simple and fast javascript stacking plugin.
+A very fast and simple javascript plugin to help you create a dynamic cascading grid.
 
 [Click Here](http://heyadem.github.io/stackgrid/) for a demo.
 
@@ -10,7 +10,7 @@ First, include _stackgrid.adem.js_ in your project.
 
 ```html
 <!-- Example HTML -->
-<div class="grid-container">
+<div id="grid-container">
   <div class="grid-item">...</div>
   <div class="grid-item">...</div>
   <div class="grid-item">...</div>
@@ -29,76 +29,85 @@ var stackgrid = new Stackgrid;
 // Config your stackgrid options here.
 stackgrid.config.column_width = 240;
 
-// Wrap the initializer inside window on load to
-// make sure to wait until everything is loaded.
+// One way to make sure everything is loaded is
+// to wrap the initializer inside window onload.
 window.onload = function() {
-  stackgrid.initialize('.grid-container', '.grid-item');
+  stackgrid.initialize('#grid-container', '.grid-item');
 };
 ```
 
-## Advanced
+## Config
+
+The values shown here are the default values.
 
 ```javascript
-// Restack the grid to apply your config changes.
-stackgrid.config.is_fluid = false;
-stackgrid.restack();
-
-// Certain changes require you to reset the grid.
-// These are changes that affect the dimensions of the grid-item or
-// if you remove any of the items.
-stackgrid.config.column_width = 400;
-stackgrid.reset();
-stackgrid.restack();
-
-// Begin configurating stackgrid.
-// The options listed here are default.
-
-stackgrid.config.column_width = 320;
+stackgrid.config.columnWidth = 320;
 stackgrid.config.gutter = 20;
-stackgrid.config.is_fluid = true;
-stackgrid.config.layout = 'ordinal';
-stackgrid.config.number_of_columns = true;
-stackgrid.config.resize_debounce_delay = 400;
+stackgrid.config.isFluid = false;
+// Currently there aer two layout options: 'ordinal', and 'optimized'
+stackgrid.config.layout = 'optimized';
+stackgrid.config.numberOfColumns = 4;
+stackgrid.config.resizeDebounceDelay = 350;
 
-// You can customize when and how each item is moved!
-// Make sure to use jQuery stop() function if you decide to
-// animate it.
-// Where you place the callback determines
-// when the next move operation is called.
-
-stackgrid.config.move: function(item, left, top, callback) {
+// This method allows you to modify how each item is moved or animated.
+stackgrid.config.moveItem: function(item, left, top, callback) {
   item.style.left = left + "px";
   item.style.top = top + "px";
   callback();
 }
 
-// This function is used to scale the container containing
-// the grid items.
-// The callback function starts the move operations.
-stackgrid.config.scale: function(container, width, height, callback) {
+// This one allows you to modify how the container scales.
+stackgrid.config.scaleContainer: function(container, width, height, callback) {
   container.style.width = width + "px";
   container.style.height = height + "px";
   callback();
 }
-
-// The first two arguments are for the container selector and the item selector.
-stackgrid.initialize('.grid-container', '.grid-item');
-
-// You can modify config directly.
-stackgrid.config.column_width = 500;
-
-// Append another item to the grid.
-var grid_container = document.getElementByClass('grid-container');
-var grid_item = document.createElement('div');
-grid_item.setAttribute('class', 'grid-item');
-grid_container.appendChild(grid_item);
-
-// When you are modifying the grid-item's dimensions or if you remove a grid-item,
-// make sure to call reset before re-stacking.
-stackgrid.reset();
-
-// Restack the grid.
-stackgrid.restack();
 ```
 
-Enjoy!
+## Reset and restack
+
+If you change any of the configurations after the grid is initialized,
+you will have to call the _restack_ method.
+
+```javascript
+stackgrid.config.layout = 'ordinal';
+stackgrid.restack()
+```
+
+This won't work if you change something that affects the size of the grid item.
+for that you will have to use the _reset_ method.
+
+```javascript
+stackgrid.config.columnWidth = 220;
+stackgrid.reset()
+```
+
+You will also need to use the reset method if you add or remove a grid item.
+
+## Append
+
+Alternatively you can use the _append_ method to add new grid-item.
+This way stackgrid will append it without having to restack the whole grid.
+
+```javascript
+// Get container.
+var gridContainer = document.getElementById("grid-container");
+
+// Create a new grid-item.
+var gridItem = document.createElement("div");
+gridItem.setAttribute("class", "grid-item");
+gridItem.innerHTML = "blah blah";
+
+// Append the new grid-item into container.
+gridContainer.appendChild(gridItem);
+
+// Append it to stackgrid.
+stackgrid.append(gridItem);
+```
+
+That's it!
+
+## License
+
+Stackgrid is licensed under the MIT license - (http://opensource.org/licenses/MIT)
+Copyright (C) 2015 Andrew Prasetya

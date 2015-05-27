@@ -3,11 +3,20 @@
 
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900,400italic)
 
-$background-color: white
+$sg-bg-color: #FCFCFC
+$sg-color-light: #F9F9F9
+$sg-color: #40DFFF
+$sg-color-hover: #00D4FF
+$sg-color-active: #00AAFF
+
+$background-color: $sg-bg-color
 $base-gutter: 40px
 
 $base-font-family: 'Lato', helvetica, arial, sans-serif
 $base-font-size: 16px
+
+$header-height: 72px
+$header-background-color: $sg-bg-color
 
 body
   background: $background-color
@@ -22,9 +31,6 @@ a:visited
   text:
     decoration: none
 
-$header-height: 96px
-$header-background-color: #F2FBFF
-
 #header
   background:
     color: $header-background-color
@@ -38,33 +44,64 @@ $header-background-color: #F2FBFF
 
   a:link,
   a:visited
+    @include transition( 0.1s ease )
+    color: $sg-color
     display: inline-block
-    color: #80D4FF
     font:
-      size: 42px
+      size: 32px
+      weight: 400
     line-height: $header-height
+    &:hover
+      color: $sg-color-hover
+    &:active
+      color: $sg-color-active
 
+// Control.
 #control
   background:
-    color: #80D4FF
-  text:
-    align: center
+    color: $sg-color
   font:
     size: 0
+  text:
+    align: center
   width: 100%
   z-index: 20
 
+a.control-button
+  @include transition( 0.1s ease )
+  background:
+    color: $sg-color
+  border:
+    left: 1px solid $sg-color-hover
+  color: white
+  cursor: pointer
+  display: inline-block
+  font:
+    size: $base-font-size
+    weight: 300
+  letter-spacing: 1px
+  padding: 0.75em 1em
+  &:hover
+    background:
+      color: $sg-color-hover
+  &:active
+    background:
+      color: $sg-color-active
+
+// Content.
 #content
-  margin: $base-gutter 0
   height: auto
+  margin: $base-gutter / 2 0
   overflow: hidden
   width: 100%
 
+// Grid.
 .grid-container
   background:
-    color: #F2FBFF
+    color: $sg-color-light
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15)
+  margin: $base-gutter / 2 auto
   position: relative
-  margin: 0 auto
 
 .grid-item
   display: inline-block
@@ -72,29 +109,7 @@ $header-background-color: #F2FBFF
     size: 0
   position: absolute
 
-
 .grid-item img
   cursor: pointer
   display: block
   width: 100%
-
-a.control-button
-  @include transition( 0.1s ease )
-  background:
-    color: #80D4FF
-  color: white
-  cursor: pointer
-  display: inline-block
-  font:
-    size: 16px
-    weight: 300
-  letter-spacing: 1px
-  padding: 1em
-
-  &:hover
-    background:
-      color: #40BFFF
-
-  &:active
-    background:
-      color: #00AAFF

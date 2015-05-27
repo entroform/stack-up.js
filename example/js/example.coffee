@@ -1,18 +1,20 @@
+# example.coffee
 stackgrid = new Stackgrid
 
 window.onload = ->
   stackgrid.config.columnWidth = 220
   stackgrid.config.gutter = 20
   stackgrid.config.isFluid = false
+  stackgrid.config.layout = 'optimized'
   grid.update()
-  stackgrid.config.move = (item, left, top, callback) ->
+  stackgrid.config.itemMove = (item, left, top, callback) ->
     Velocity item,
       left: left
       top: top,
       queue: false
       duration: 200,
       callback
-  stackgrid.config.scale = (container, width, height, callback) ->
+  stackgrid.config.containerScale = (container, width, height, callback) ->
     Velocity container,
       height: height
       width: width,
@@ -25,18 +27,22 @@ window.onload = ->
 grid =
   $container: undefined
   $items: undefined
+  columnWidth: 220
+  gutter: 20
+  isFluid: false
+  layout: 'optimized'
 
-(grid.update = ->
+grid.update = ->
   @$container = document.querySelector '.grid-container'
   @$items = document.querySelectorAll '.grid-item'
-  item.addEventListener 'click', grid.removeItem for item in @$items
+  item.addEventListener 'click', @removeItem for item in @$items
   return
-)()
 
 grid.removeItem = ->
-  grid.$container.removeChild this
-  stackgrid.reset()
-  stackgrid.restack()
+  Velocity this, scale: 0, 300, =>
+    grid.$container.removeChild this
+    stackgrid.reset()
+    stackgrid.restack()
   return
 
 grid.append = (url) ->
@@ -47,71 +53,96 @@ grid.append = (url) ->
     @$container.appendChild gridItem
     @update()
     Velocity gridItem, scale: 0, 1, ->
-      stackgrid.reset()
-      stackgrid.restack()
+      stackgrid.append gridItem
     Velocity gridItem, scale: 1, 200
   return
 
 $buttons = document.getElementsByClassName 'control-button'
 $button.addEventListener 'click', ( (event) -> event.preventDefault() ) for $button in $buttons
-buttons = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen']
+buttons = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 button = {}
 button[i] = document.querySelector ".control-button.-#{i}" for i in buttons
 
+# Append image.
 button.one.onclick = (-> grid.append 'img/short.jpg' )
 button.two.onclick = (-> grid.append 'img/medium.jpg' )
 button.three.onclick = (-> grid.append 'img/tall.jpg' )
 
+# Gutter toggle.
 button.four.onclick = ->
-  stackgrid.config.gutter = 20
+  if grid.gutter is 20
+    this.innerHTML = 'Gutter - 40'
+    grid.gutter = 40
+    stackgrid.config.gutter = 40
+  else if grid.gutter is 40
+    this.innerHTML = 'Gutter - 0'
+    grid.gutter = 0
+    stackgrid.config.gutter = 0
+  else
+    this.innerHTML = 'Gutter - 20'
+    grid.gutter = 20
+    stackgrid.config.gutter = 20
   stackgrid.restack()
   return
 
+# Layout toggle.
 button.five.onclick = ->
-  stackgrid.config.gutter = 0
+  if grid.layout is 'ordinal'
+    this.innerHTML = 'Layout - optimized'
+    grid.layout = 'optimized'
+    stackgrid.config.layout = 'optimized'
+  else
+    this.innerHTML = 'Layout - ordinal'
+    grid.layout = 'ordinal'
+    stackgrid.config.layout = 'ordinal'
   stackgrid.restack()
   return
 
+# Fluid toggle.
 button.six.onclick = ->
-  stackgrid.config.layout = 'ordinal'
+  if grid.isFluid
+    this.innerHTML = 'isFluid - false'
+    grid.isFluid = false
+    stackgrid.config.isFluid = false
+  else
+    this.innerHTML = 'isFluid - true'
+    grid.isFluid = true
+    stackgrid.config.isFluid = true
   stackgrid.restack()
   return
 
+# Column toggle.
 button.seven.onclick = ->
-  stackgrid.config.layout = 'optimized'
+  if grid.numberOfColumns is 3
+    this.innerHTML = 'numberOfColumns - 4'
+    grid.numberOfColumns = 4
+    stackgrid.config.numberOfColumns = 4
+  else
+    this.innerHTML = 'numberOfColumns - 3'
+    grid.numberOfColumns = 3
+    stackgrid.config.numberOfColumns = 3
   stackgrid.restack()
   return
 
+# Width toggle.
 button.eight.onclick = ->
-  stackgrid.config.isFluid = true
-  stackgrid.restack()
+  if grid.columnWidth is 320
+    this.innerHTML = 'columnWidth - 220'
+    grid.columnWidth = 220
+    stackgrid.config.columnWidth = 220
+  else if grid.columnWidth is 220
+    this.innerHTML = 'columnWidth - 120'
+    grid.columnWidth = 120
+    stackgrid.config.columnWidth = 120
+  else
+    this.innerHTML = 'columnWidth - 320'
+    grid.columnWidth = 320
+    stackgrid.config.columnWidth = 320
+  stackgrid.reset()
   return
 
+# Clear.
 button.nine.onclick = ->
-  stackgrid.config.isFluid = false
-  stackgrid.restack()
-  return
-
-button.ten.onclick = ->
   grid.$container.removeChild item for item in grid.$items
   stackgrid.reset()
-  stackgrid.restack()
-  return
-
-button.eleven.onclick = ->
-  stackgrid.config.columnWidth = 320
-  stackgrid.reset()
-  stackgrid.restack()
-  return
-
-button.twelve.onclick = ->
-  stackgrid.config.columnWidth = 220
-  stackgrid.reset()
-  stackgrid.restack()
-  return
-
-button.thirteen.onclick = ->
-  stackgrid.config.columnWidth = 120
-  stackgrid.reset()
-  stackgrid.restack()
   return
