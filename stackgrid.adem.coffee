@@ -73,7 +73,7 @@
 
     _grid.layout = ->
       _layout[stackgrid.config.layout].setup()
-      _layout[stackgrid.config.layout].loop()
+      _layout[stackgrid.config.layout].loop() if @items.length
       return
 
     # scale container and move items. (5) - stack
