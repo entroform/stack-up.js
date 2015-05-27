@@ -7,14 +7,14 @@ window.onload = ->
   stackgrid.config.isFluid = false
   stackgrid.config.layout = 'optimized'
   grid.update()
-  stackgrid.config.itemMove = (item, left, top, callback) ->
+  stackgrid.config.moveItem = (item, left, top, callback) ->
     Velocity item,
       left: left
       top: top,
       queue: false
       duration: 200,
       callback
-  stackgrid.config.containerScale = (container, width, height, callback) ->
+  stackgrid.config.scaleContainer = (container, width, height, callback) ->
     Velocity container,
       height: height
       width: width,
