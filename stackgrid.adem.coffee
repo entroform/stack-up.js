@@ -64,6 +64,7 @@
       else
         numberOfColumns = stackgrid.config.numberOfColumns
       numberOfColumns = @items.length if numberOfColumns > @items.length
+      numberOfColumns = 1 if @items.length and numberOfColumns <= 0
       return numberOfColumns
 
     # Update _grid.numberOfColumns. (3) - stack
