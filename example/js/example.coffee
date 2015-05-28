@@ -12,17 +12,17 @@ window.onload = ->
     Velocity item,
       left: left
       top: top,
+      complete: callback
+      duration: 200
       queue: false
-      duration: 200,
-      callback
   stackgrid.config.scaleContainer = (container, width, height, callback) ->
     Velocity container, 'stop'
     Velocity container,
       height: height
       width: width,
+      complete: callback
+      duration: 200
       queue: false
-      duration: 200,
-      callback
   stackgrid.initialize '.grid-container', '.grid-item'
   return
 
