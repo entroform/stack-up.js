@@ -3,3 +3,4 @@
 .DS_Store
 .sass-cache/
 min/
+node_modules/

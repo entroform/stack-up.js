@@ -8,9 +8,13 @@
 
     _viewport = height: 0, width: 0
     ( _viewport.update = ->
-      _viewport.height = window.innerHeight
-      _viewport.width = window.innerWidth
-      return
+      if stackgrid&&stackgrid.config.viewport && stackgrid.config.viewport.nodeType == 1
+        _viewport.height = stackgrid.config.viewport.offsetHeight;
+        _viewport.width = stackgrid.config.viewport.offsetWidth;
+      else
+        _viewport.height = window.innerHeight
+        _viewport.width = window.innerWidth
+      #return;
     )()
 
     _resize =

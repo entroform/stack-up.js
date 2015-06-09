@@ -6,6 +6,7 @@ window.onload = ->
   stackgrid.config.gutter = 20
   stackgrid.config.isFluid = false
   stackgrid.config.layout = 'optimized'
+  stackgrid.config.viewport = document.querySelector '#content'
   grid.update()
   stackgrid.config.moveItem = (item, left, top, callback) ->
     Velocity item,
