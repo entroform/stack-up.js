@@ -8,9 +8,19 @@
 
     _viewport = height: 0, width: 0
     ( _viewport.update = ->
-      _viewport.height = window.innerHeight
-      _viewport.width = window.innerWidth
-      return
+      if stackgrid&&stackgrid.config.viewport && stackgrid.config.viewport.nodeType == 1
+        
+        style = stackgrid.config.viewport.currentStyle || window.getComputedStyle(stackgrid.config.viewport);
+        paddingHorizontal = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+        paddingVertical = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+
+        _viewport.height = stackgrid.config.viewport.offsetHeight-paddingVertical;
+        _viewport.width = stackgrid.config.viewport.offsetWidth-paddingHorizontal;
+
+      else
+        _viewport.height = window.innerHeight
+        _viewport.width = window.innerWidth
+      #return;
     )()
 
     _resize =
