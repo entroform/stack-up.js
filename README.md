@@ -1,6 +1,6 @@
 # stack-up.js
 
-A simple javascript plugin to help you create cascading grid layouts.
+A simple and fast javascript plugin to help you create fixed-width and variable-height grid layout.
 
 ## Getting started
 
@@ -18,7 +18,7 @@ First, include _stack-up.js_ in your project.
 <script src="js/stack-up.js"></script>
 ```
 
-### Minimum CSS requirements.
+### Minimum CSS requirements
 
 ```css
 #grid-container {
@@ -34,7 +34,7 @@ First, include _stack-up.js_ in your project.
 }
 ```
 
-Make sure all content inside are loaded before initializing stack-up.
+Make sure all content inside the container are loaded before initializing stack-up.
 This is to make sure stack-up calculates the right height before plotting.
 
 ```javascript
@@ -49,7 +49,7 @@ window.onload = function() {
     itemsSelector: '#grid-container > .grid-item',
     columnWidth: 240,
   });
-
+  // Initialize once you are done configurating.
   stackup.initialize();
 
 };
@@ -61,7 +61,6 @@ Here are the default config values.
 
 ```javascript
 stackup.config.columnWidth = 320;
-
 stackup.config.gutter = 18;
 stackup.config.isFluid = false;
 
@@ -70,10 +69,11 @@ stackup.config.layout = "ordinal";
 stackup.config.numberOfColumns = 3;
 stackup.config.resizeDebounceDelay = 350;
 
-// This method allows you to modify how each item is moved or animated.
+// This function allows you to modify how each item is moved or animated.
 stackup.config.moveItem: function(item, left, top, callback) {
   item.style.left = left + "px";
   item.style.top = top + "px";
+  // The callback function is important!
   callback();
 };
 
@@ -86,7 +86,7 @@ stackup.config.scaleContainer: function(container, width, height, callback) {
 };
 ```
 
-## Reset and restack
+## Reset and re-stack
 
 If you change any of the configurations after the grid is initialized,
 you will have to call the _restack_ method.
@@ -97,7 +97,7 @@ stackup.config.layout = 'optimized';
 stackup.restack();
 ```
 
-Re-stack will not work properly if you change something that affects the dimensions of the grid item. You will have to use _reset_ instead.
+Re-stack will not work properly if you change something that affect the dimensions of the grid item. You will have to use _reset_ instead. (This re-calculates the grid stacking from top to bottom.)
 
 ```javascript
 stackup.config.columnWidth = 220;
@@ -108,8 +108,8 @@ You will also need to use the _reset_ method if you add or remove any grid item.
 
 ## Append
 
-The _append_ method allows you to add a new grid item without re-stacking the whole grid.
-This saves computation time.
+The _append_ method allows you to add a new grid item without calculating the whole grid.
+This saves computation time!
 
 ```javascript
 // Get container.
@@ -133,4 +133,4 @@ That's it!
 
 StackUp is licensed under the MIT license - http://opensource.org/licenses/MIT
 
-Copyright (C) 2015 Andrew Prasetya
+Copyright (C) 2016 Andrew Prasetya
