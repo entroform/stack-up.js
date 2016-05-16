@@ -2,7 +2,6 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900,400italic);
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -47,75 +46,34 @@ table {
   border-spacing: 0; }
 
 body {
-  background: #FCFCFC;
-  font-family: "Lato", helvetica, arial, sans-serif;
-  font-size: 16px;
+  font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16pt; }
+
+body {
+  background: #e2e4e9;
   text-align: center; }
 
-a:link,
-a:visited {
+a:link, a:visited {
   text-decoration: none; }
 
 #header {
-  background-color: #FCFCFC;
-  height: 72px;
-  line-height: 72px;
-  width: 100%;
-  z-index: 10; }
-  #header h1 {
-    line-height: 72px; }
-  #header a:link,
-  #header a:visited {
-    -webkit-transition: 0.1s ease;
-    -moz-transition: 0.1s ease;
-    transition: 0.1s ease;
-    color: #40DFFF;
-    display: inline-block;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 72px; }
-    #header a:link:hover,
-    #header a:visited:hover {
-      color: #00D4FF; }
-    #header a:link:active,
-    #header a:visited:active {
-      color: #00AAFF; }
-
-#control {
-  background-color: #40DFFF;
-  font-size: 0;
-  text-align: center;
-  width: 100%;
-  z-index: 20; }
-
-a.control-button {
-  -webkit-transition: 0.1s ease;
-  -moz-transition: 0.1s ease;
-  transition: 0.1s ease;
-  background-color: #40DFFF;
-  border-left: 1px solid #00D4FF;
-  color: white;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 300;
-  letter-spacing: 1px;
-  padding: 0.75em 1em; }
-  a.control-button:hover {
-    background-color: #00D4FF; }
-  a.control-button:active {
-    background-color: #00AAFF; }
+  margin: 48pt 0; }
+  #header h1 > a:link, #header a:visited {
+    color: #fcfcfd;
+    font-size: 24pt;
+    font-weight: 600;
+    border-bottom: 4pt solid #fcfcfd; }
 
 #content {
   height: auto;
-  margin: 20px 0;
+  margin: 8pt 0;
   overflow: hidden;
   width: 100%; }
 
 .grid-container {
-  background-color: #F9F9F9;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
-  margin: 20px auto;
+  background: #fcfcfd;
+  margin: 0 auto;
+  margin-bottom: 32pt;
   position: relative; }
 
 .grid-item {

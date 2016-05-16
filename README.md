@@ -1,12 +1,10 @@
-# stackgrid.adem.js
+# stack-up.js
 
-A very fast and simple javascript plugin to help you create a dynamic cascading grid.
-
-[Click Here](http://heyadem.github.io/stackgrid/) for a demo.
+# A simple javascript plugin to help you create cascading grid(s).
 
 ## Getting started
 
-First, include _stackgrid.adem.js_ in your project.
+First, include _stack-up.js_ in your project.
 
 ```html
 <!-- Example HTML -->
@@ -17,10 +15,10 @@ First, include _stackgrid.adem.js_ in your project.
 </div>
 
 <!-- Scripts -->
-<script src="js/stackgrid.adem.js"></script>
+<script src="js/stack-up.js"></script>
 ```
 
-### Minimum CSS requirements
+### Minimum CSS requirements.
 
 ```css
 #grid-container {
@@ -36,7 +34,7 @@ First, include _stackgrid.adem.js_ in your project.
 }
 ```
 
-Make sure all the contents inside are fully loaded before initializing stackgrid.
+Make sure all content inside are completely loaded before initializing stackgrid.
 This is to make sure stackgrid calculates the right height before plotting.
 
 ```javascript

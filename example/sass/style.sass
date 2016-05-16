@@ -1,112 +1,49 @@
 @import vendor/reset
 @import bourbon
 
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900,400italic)
+$font-family: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif
+$font-size: 16pt
+$gutter: 16pt
 
-$sg-bg-color: #FCFCFC
-$sg-color-light: #F9F9F9
-$sg-color: #40DFFF
-$sg-color-hover: #00D4FF
-$sg-color-active: #00AAFF
-
-$background-color: $sg-bg-color
-$base-gutter: 40px
-
-$base-font-family: 'Lato', helvetica, arial, sans-serif
-$base-font-size: 16px
-
-$header-height: 72px
-$header-background-color: $sg-bg-color
+%font-normalize
+  font:
+    family: $font-family
+    size: $font-size
 
 body
-  background: $background-color
-  font:
-    family: $base-font-family
-    size: $base-font-size
-  text:
-    align: center
+  @extend %font-normalize
+  background: hsl(220, 15, 90)
+  text-align: center
 
-a:link,
-a:visited
-  text:
-    decoration: none
+a:link, a:visited
+  text-decoration: none
 
+$container-color: hsl(240, 15, 99)
 #header
-  background:
-    color: $header-background-color
-  height: $header-height
-  line-height: $header-height
-  width: 100%
-  z-index: 10
+  margin: $gutter * 3 0
 
-  h1
-    line-height: $header-height
-
-  a:link,
-  a:visited
-    @include transition( 0.1s ease )
-    color: $sg-color
-    display: inline-block
+  h1 > a:link, a:visited
+    color: $container-color
     font:
-      size: 32px
-      weight: 400
-    line-height: $header-height
-    &:hover
-      color: $sg-color-hover
-    &:active
-      color: $sg-color-active
+      size: $font-size * 1.5
+      weight: 600
+    border-bottom: 4pt solid $container-color
 
-// Control.
-#control
-  background:
-    color: $sg-color
-  font:
-    size: 0
-  text:
-    align: center
-  width: 100%
-  z-index: 20
-
-a.control-button
-  @include transition( 0.1s ease )
-  background:
-    color: $sg-color
-  border:
-    left: 1px solid $sg-color-hover
-  color: white
-  cursor: pointer
-  display: inline-block
-  font:
-    size: $base-font-size
-    weight: 300
-  letter-spacing: 1px
-  padding: 0.75em 1em
-  &:hover
-    background:
-      color: $sg-color-hover
-  &:active
-    background:
-      color: $sg-color-active
-
-// Content.
 #content
   height: auto
-  margin: $base-gutter / 2 0
+  margin: $gutter / 2 0
   overflow: hidden
   width: 100%
 
-// Grid.
 .grid-container
-  background:
-    color: $sg-color-light
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15)
-  margin: $base-gutter / 2 auto
+  background: $container-color
+  margin: 0 auto
+  margin-bottom: $gutter * 2
   position: relative
 
 .grid-item
   display: inline-block
-  font:
-    size: 0
+  font-size: 0
   position: absolute
 
 .grid-item img

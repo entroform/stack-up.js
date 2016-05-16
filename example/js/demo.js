@@ -1,0 +1,1 @@
+(function(){var i;i=new StackUp({containerSelector:".grid-container",itemsSelector:".grid-item",columnWidth:220,isFluid:!0,gutter:18}),i.initialize()}).call(this);
