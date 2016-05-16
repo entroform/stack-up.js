@@ -1,6 +1,6 @@
 # stack-up.js
 
-# A simple javascript plugin to help you create cascading layout.
+A simple javascript plugin to help you create cascading grid layouts.
 
 ## Getting started
 
@@ -43,6 +43,7 @@ This is to make sure stack-up calculates the right height before plotting.
 // to wrap the initializer inside window onload.
 window.onload = function() {
 
+  // Create a stackup object.
   var stackup = new StackUp({
     containerSelector: '#grid-container',
     itemsSelector: '#grid-container > .grid-item',
@@ -60,6 +61,7 @@ Here are the default config values.
 
 ```javascript
 stackup.config.columnWidth = 320;
+
 stackup.config.gutter = 18;
 stackup.config.isFluid = false;
 
@@ -90,6 +92,7 @@ If you change any of the configurations after the grid is initialized,
 you will have to call the _restack_ method.
 
 ```javascript
+
 stackup.config.layout = 'optimized';
 stackup.restack();
 ```
