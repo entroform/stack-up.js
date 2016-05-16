@@ -1,3 +1,6 @@
+# Licensed under the MIT license - http://opensource.org/licenses/MIT
+# Copyright (C) 2016 Andrew Prasetya
+
 class @StackUp
 
   containerElement: undefined
