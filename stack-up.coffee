@@ -9,12 +9,12 @@ class @StackUp
   containerWidth: 0
   items: [] # format: [index][item, itemHeight, left, top]
   numberOfColumns: 0
-  viewport: height: 0, width: 0
+  boundary: height: 0, width: 0
 
   config:
     containerSelector: undefined
     itemsSelector: undefined
-    viewport: window
+    boundary: window
     columnWidth: 320
     gutter: 18
     isFluid: false
@@ -35,7 +35,7 @@ class @StackUp
 
   initialize: ->
     window.addEventListener 'resize', @resizeHandler
-    @viewportUpdate()
+    @boundaryUpdate()
     # Update grid selectors. - reset
     @updateSelectors()
     @populateItems()
@@ -44,16 +44,16 @@ class @StackUp
     @applyLayout()
     @draw()
 
-  viewportUpdate: ->
-    if @config.viewport isnt window
-      style = @config.viewport.currentStyle || window.getComputedStyle(@config.viewport)
-      paddingHorizontal = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
-      paddingVertical = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom)
-      @viewport.height = @config.viewport.offsetHeight - paddingVertical
-      @viewport.width = @config.viewport.offsetWidth - paddingHorizontal
+  boundaryUpdate: ->
+    if @config.boundary isnt window
+      style = @config.boundary.currentStyle || window.getComputedStyle(@config.boundary)
+      horizontalPaddings = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
+      verticalPaddings = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom)
+      @boundary.height = @config.boundary.offsetHeight - verticalPaddings
+      @boundary.width = @config.boundary.offsetWidth - horizontalPaddings
     else
-      @viewport.height = window.innerHeight
-      @viewport.width = window.innerWidth
+      @boundary.height = window.innerHeight
+      @boundary.width = window.innerWidth
 
   resizeDebounceTimeout: undefined
   resizeDebounce: (fn, delay) ->
@@ -64,7 +64,7 @@ class @StackUp
     @restack() if @calculateNumberOfColumns() isnt @numberOfColumns and @config.isFluid
 
   resizeHandler: =>
-    @viewportUpdate()
+    @boundaryUpdate()
     @resizeDebounce @resizeComplete, @config.resizeDebounceDelay
 
   # Update grid selectors. (1) - reset
@@ -86,7 +86,7 @@ class @StackUp
 
   calculateNumberOfColumns: ->
     if @config.isFluid
-      numberOfColumns = Math.floor (@viewport.width - @config.gutter) / (@config.columnWidth + @config.gutter)
+      numberOfColumns = Math.floor (@boundary.width - @config.gutter) / (@config.columnWidth + @config.gutter)
     else
       numberOfColumns = @config.numberOfColumns
     numberOfColumns = @items.length if numberOfColumns > @items.length
