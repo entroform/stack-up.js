@@ -1,6 +1,6 @@
 # stack-up.js
 
-A simple and fast javascript plugin to help you create fixed-width and variable-height grid layout.
+A simple and fast JavaScript plugin to help you create fixed-width, variable-height grid layout.
 
 ## Getting started
 
@@ -14,7 +14,7 @@ First, include _stack-up.js_ in your project.
   <div class="grid-item">...</div>
 </div>
 
-<!-- Javascripts -->
+<!-- JavaScript -->
 <script src="js/stack-up.js"></script>
 ```
 
