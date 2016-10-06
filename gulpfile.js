@@ -13,7 +13,7 @@ function coffeeSourcesArray() {
   });
 }
 
-// Gulp object declarations.
+// gulp object declarations
 var gulp = require('gulp');
 
 var coffee = require('gulp-coffee');
@@ -35,7 +35,7 @@ var uglifyConfig = {
 
 var util = require('gulp-util');
 
-// Gulp tasks.
+// gulp tasks
 gulp.task('default', function() {});
 
 gulp.task('coffee', function() {
