@@ -169,7 +169,7 @@ class @StackUp
     @layout.columnPointer = 0
     this
 
-  # This should be called when any of the item(s) are being modified, added, or removed.
+  # this should be called when any of the item(s) are being modified, added, or removed
   reset: ->
     @containerWidth  = 0
     @containerHeight = 0
