@@ -1,5 +1,2 @@
-*.codekit
-.codekit-cache/
 .DS_Store
-.sass-cache/
-min/
+node_modules

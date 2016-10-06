@@ -4,22 +4,23 @@
 
 class @StackUp
 
+  boundaryHeight  : 0
+  boundaryWidth   : 0
   containerElement: undefined
-  itemElements    : undefined
   containerHeight : 0
   containerWidth  : 0
+  itemElements    : undefined
   items           : [] # format: [index][item, itemHeight, left, top]
   numberOfColumns : 0
-  boundary        : height: 0, width: 0
 
   config:
-    containerSelector  : undefined
-    itemsSelector      : undefined
     boundary           : window
     columnWidth        : 320
+    containerSelector  : undefined
     gutter             : 18
     isFluid            : false
-    layout             : 'ordinal'
+    itemsSelector      : undefined
+    layout             : 'ordinal' # ordinal, optimized
     numberOfColumns    : 3
     resizeDebounceDelay: 350
     moveItem: (item, left, top, callback) ->
@@ -32,76 +33,88 @@ class @StackUp
       callback()
 
   constructor: (properties) ->
-    @config[property] = value for property, value of properties
+    @setConfig properties
+    this
+
+  setConfig: (config) ->
+    if config
+      @config[property] = value for property, value of config
+    this
 
   initialize: ->
     window.addEventListener 'resize', @resizeHandler
     @boundaryUpdate()
-    # update grid selectors. - reset
+    # update grid selectors - reset
     @updateSelectors()
     @populateItems()
-    # update grid selectors. - stacking
+    # update grid selectors - stacking
     @updateNumberOfColumns()
     @applyLayout()
     @draw()
+    this
 
   boundaryUpdate: ->
     if @config.boundary isnt window
       style = @config.boundary.currentStyle || window.getComputedStyle(@config.boundary)
       horizontalPaddings = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
       verticalPaddings   = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom)
-      @boundary.height   = @config.boundary.offsetHeight - verticalPaddings
-      @boundary.width    = @config.boundary.offsetWidth - horizontalPaddings
+      @boundaryHeight    = @config.boundary.offsetHeight - verticalPaddings
+      @boundaryWidth     = @config.boundary.offsetWidth - horizontalPaddings
     else
-      @boundary.height = window.innerHeight
-      @boundary.width  = window.innerWidth
+      @boundaryHeight = window.innerHeight
+      @boundaryWidth  = window.innerWidth
     this
 
   resizeDebounceTimeout: undefined
   resizeDebounce: (fn, delay) ->
     clearTimeout @resizeDebounceTimeout
     @resizeDebounceTimeout = window.setTimeout fn, delay
+    this
 
   resizeComplete: =>
     @restack() if @calculateNumberOfColumns() isnt @numberOfColumns and @config.isFluid
+    this
 
   resizeHandler: =>
     @boundaryUpdate()
     @resizeDebounce @resizeComplete, @config.resizeDebounceDelay
+    this
 
   # update grid selectors. (1) - reset
   # required stack-up.initialize to be called first.
   updateSelectors: ->
     @containerElement = document.querySelector @config.containerSelector
-    @itemElements = document.querySelectorAll "#{@config.containerSelector} > #{@config.itemsSelector}"
+    @itemElements     = document.querySelectorAll "#{@config.containerSelector} > #{@config.itemsSelector}"
     this
 
-  # This only updates @items, it does not update the selectors.
+  # this only updates @items, it does not update the selectors
   appendItem: (item) ->
     item.style.width = "#{@config.columnWidth}px"
     @items.push [item, item.offsetHeight, 0, 0]
     this
 
-  # Populate grid items. (2) - reset
+  # populate grid items (2) - reset
   populateItems: ->
-    # Clear items before populating.
+    # clear items before populating
     @items = []
     @appendItem item for item, index in @itemElements
+    this
 
   calculateNumberOfColumns: ->
     if @config.isFluid
-      numberOfColumns = Math.floor (@boundary.width - @config.gutter) / (@config.columnWidth + @config.gutter)
+      numberOfColumns = Math.floor (@boundaryWidth - @config.gutter) / (@config.columnWidth + @config.gutter)
     else
       numberOfColumns = @config.numberOfColumns
     numberOfColumns = @items.length if numberOfColumns > @items.length
     numberOfColumns = 1 if @items.length and numberOfColumns <= 0
     return numberOfColumns
 
-  # update _grid.numberOfColumns. (3) - stack
+  # update numberOfColumns (3) - stack
   updateNumberOfColumns: ->
     @numberOfColumns = @calculateNumberOfColumns()
+    this
 
-  # scale container and move items. (5) - stack
+  # scale container and move items (5) - stack
   draw: ->
     @containerWidth = (@config.columnWidth + @config.gutter) * @numberOfColumns
     height = @containerHeight + @config.gutter
@@ -109,9 +122,10 @@ class @StackUp
     @config.scaleContainer @containerElement, width, height, =>
       callback = ->
       @config.moveItem item[0], item[2], item[3], callback for item, index in @items
+    this
 
   # stack (4)
-  # Layout updates the _grid.containerHeight and updates _grid.items.
+  # layout updates the containerHeight and updates items
   layout:
     columnPointer: 0
     ordinal:
@@ -155,15 +169,12 @@ class @StackUp
     @layout.columnPointer = 0
     this
 
-  # This should be called when any item are being modified, added, or removed.
+  # This should be called when any of the item(s) are being modified, added, or removed.
   reset: ->
     @containerWidth  = 0
     @containerHeight = 0
     @items           = []
-    @updateSelectors()
-    @populateItems()
-    @resetLayout()
-    @restack()
+    @updateSelectors().populateItems().resetLayout().restack()
     this
 
   append: (item, callback) ->
@@ -177,8 +188,5 @@ class @StackUp
     this
 
   restack: ->
-    @updateNumberOfColumns()
-    @resetLayout()
-    @applyLayout()
-    @draw()
+    @updateNumberOfColumns().resetLayout().applyLayout().draw()
     this
