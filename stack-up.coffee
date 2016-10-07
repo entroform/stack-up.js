@@ -1,6 +1,6 @@
 # licensed under the MIT license - http://opensource.org/licenses/MIT
 # copyright (C) 2016 Andrew Prasetya
-# version: Thu 6 Oct 12:44:15 2016
+# version: Thu 6 Oct 21:05:07 2016
 
 class @StackUp
 
@@ -117,8 +117,8 @@ class @StackUp
   # scale container and move items (5) - stack
   draw: ->
     @containerWidth = (@config.columnWidth + @config.gutter) * @numberOfColumns
-    height = @containerHeight + @config.gutter
-    width = @containerWidth + @config.gutter
+    height          = @containerHeight + @config.gutter
+    width           = @containerWidth + @config.gutter
     @config.scaleContainer @containerElement, width, height, =>
       callback = ->
       @config.moveItem item[0], item[2], item[3], callback for item, index in @items
