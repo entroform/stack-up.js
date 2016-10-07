@@ -1,0 +1,1 @@
+window.onload=function(){var i;return i=new StackUp({columnWidth:220,containerSelector:".grid-container",gutter:18,isFluid:!0,itemsSelector:".grid-item",layout:"optimized"}),i.initialize()};

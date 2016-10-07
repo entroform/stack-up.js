@@ -1,25 +1,25 @@
-@import vendor/reset
-@import bourbon
+@import 'bourbon/bourbon'
+@import 'reset'
 
 $font-family: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif
 $font-size: 16pt
 $gutter: 16pt
+$container-color: hsl(240, 15, 99)
 
-%font-normalize
+=font-normalize
   font:
     family: $font-family
     size: $font-size
 
 body
-  @extend %font-normalize
+  +font-normalize
   background: hsl(220, 15, 90)
   text-align: center
 
 a:link, a:visited
   text-decoration: none
 
-$container-color: hsl(240, 15, 99)
-#header
+.header
   margin: $gutter * 3 0
 
   h1 > a:link, a:visited
@@ -29,7 +29,7 @@ $container-color: hsl(240, 15, 99)
       weight: 600
     border-bottom: 4pt solid $container-color
 
-#content
+.content
   height: auto
   margin: $gutter / 2 0
   overflow: hidden
@@ -47,6 +47,5 @@ $container-color: hsl(240, 15, 99)
   position: absolute
 
 .grid-item img
-  cursor: pointer
   display: block
   width: 100%

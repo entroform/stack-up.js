@@ -1,6 +1,6 @@
-# Licensed under the MIT license - http://opensource.org/licenses/MIT
-# Copyright (C) 2016 Andrew Prasetya
-# Version: Thu 6 Oct 12:44:15 2016
+# licensed under the MIT license - http://opensource.org/licenses/MIT
+# copyright (C) 2016 Andrew Prasetya
+# version: Thu 6 Oct 12:44:15 2016
 
 class @StackUp
 
