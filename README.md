@@ -88,8 +88,8 @@ stackup.config.scaleContainer: function(container, width, height, callback) {
 
 ## Reset and restack
 
-If you change any of the configurations after the grid is initialized,
-you will need to call the `restack` method.
+Once the grid is initialized; you will need to call the `restack` method if you change any of the configurations.
+
 
 ```javascript
 
@@ -98,7 +98,7 @@ stackup.restack();
 ```
 
 The `restack` method will not work properly if you change something that affect the dimensions of the grid item.
-You will have to use `reset` instead. (This recalculates the grid stacking from top to bottom)
+You will have to use `reset` instead. (This recalculates the grid stacking from top to bottom.)
 
 ```javascript
 stackup.config.columnWidth = 220;
@@ -109,8 +109,7 @@ You will also need to use the `reset` method if you add or remove any grid item.
 
 ## Append
 
-The `append` method allows you to add a new grid item without calculating the whole grid.
-This saves computation time!
+The `append` method allows you to add a new grid item without re-calculating everything.
 
 ```javascript
 // Get container element.
