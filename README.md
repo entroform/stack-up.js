@@ -105,7 +105,7 @@ stackup.config.columnWidth = 220;
 stackup.reset();
 ```
 
-You will also need to use the _reset_ method if you add or remove any grid item.
+You will also need to use the `reset` method if you add or remove any grid item.
 
 ## Append
 
