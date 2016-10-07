@@ -14,7 +14,7 @@ First, include _stack-up.js_ in your project.
   <div class="grid-item">...</div>
 </div>
 
-<!-- JavaScript -->
+<!-- Scripts -->
 <script src="js/stack-up.js"></script>
 ```
 
@@ -113,7 +113,7 @@ The `append` method allows you to add a new grid item without calculating the wh
 This saves computation time!
 
 ```javascript
-// Get container.
+// Get container element.
 var gridContainer = document.getElementById("grid-container");
 
 // Create a new grid item element.
@@ -128,7 +128,7 @@ gridContainer.appendChild(gridItem);
 stackup.append(gridItem);
 ```
 
-There is currently no `prepend` method, but you can easily simulate it by inserting an element manually and calling the `reset` method.
+There is currently no `prepend` method.
 
 That's it!
 
