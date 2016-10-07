@@ -45,8 +45,8 @@ window.onload = function() {
 
   // Create a stackup object.
   var stackup = new StackUp({
-    containerSelector: '#grid-container',
-    itemsSelector    : '#grid-container > .grid-item',
+    containerSelector: "#grid-container",
+    itemsSelector    : "#grid-container > .grid-item",
     columnWidth      : 240,
   });
   // Initialize once you are done configurating.
@@ -64,7 +64,7 @@ stackup.setConfig({
   columnWidth        : 320,
   gutter             : 18,
   isFluid            : false,
-  layout             : 'ordinal', // ordinal, optimized
+  layout             : "ordinal", // ordinal, optimized
   numberOfColumns    : 3,
   resizeDebounceDelay: 350
 });
