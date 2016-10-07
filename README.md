@@ -49,7 +49,7 @@ window.onload = function() {
     itemsSelector    : "#grid-container > .grid-item",
     columnWidth      : 240,
   });
-  // Initialize once you are done configurating.
+  // Initialize stackup.
   stackup.initialize();
 
 };
@@ -57,7 +57,7 @@ window.onload = function() {
 
 ## Config
 
-Here are the default config values.
+Customize stack-up to your needs.
 
 ```javascript
 stackup.setConfig({
@@ -73,7 +73,7 @@ stackup.setConfig({
 stackup.config.moveItem: function(item, left, top, callback) {
   item.style.left = left + "px";
   item.style.top  = top + "px";
-  // The callback function is needed.
+  // The callback function is required to continue operation.
   callback();
 };
 
@@ -81,15 +81,15 @@ stackup.config.moveItem: function(item, left, top, callback) {
 stackup.config.scaleContainer: function(container, width, height, callback) {
   container.style.width  = width + "px";
   container.style.height = height + "px";
-  // The callback function is needed.
+  // The callback function is required to continue operation.
   callback();
 };
 ```
 
-## Reset and re-stack
+## Reset and restack
 
 If you change any of the configurations after the grid is initialized,
-you will have to call the _restack_ method.
+you will need to call the `restack` method.
 
 ```javascript
 
@@ -97,7 +97,8 @@ stackup.config.layout = 'optimized';
 stackup.restack();
 ```
 
-Re-stack will not work properly if you change something that affect the dimensions of the grid item. You will have to use _reset_ instead. (This re-calculates the grid stacking from top to bottom.)
+The `restack` method will not work properly if you change something that affect the dimensions of the grid item.
+You will have to use `reset` instead. (This recalculates the grid stacking from top to bottom)
 
 ```javascript
 stackup.config.columnWidth = 220;
@@ -108,7 +109,7 @@ You will also need to use the _reset_ method if you add or remove any grid item.
 
 ## Append
 
-The _append_ method allows you to add a new grid item without calculating the whole grid.
+The `append` method allows you to add a new grid item without calculating the whole grid.
 This saves computation time!
 
 ```javascript
@@ -126,6 +127,8 @@ gridContainer.appendChild(gridItem);
 // Append it to stackup.
 stackup.append(gridItem);
 ```
+
+There is currently no `prepend` method, but you can easily simulate it by inserting an element manually and calling the `reset` method.
 
 That's it!
 
