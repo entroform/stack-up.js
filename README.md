@@ -46,8 +46,8 @@ window.onload = function() {
   // Create a stackup object.
   var stackup = new StackUp({
     containerSelector: '#grid-container',
-    itemsSelector: '#grid-container > .grid-item',
-    columnWidth: 240,
+    itemsSelector    : '#grid-container > .grid-item',
+    columnWidth      : 240,
   });
   // Initialize once you are done configurating.
   stackup.initialize();
@@ -60,28 +60,28 @@ window.onload = function() {
 Here are the default config values.
 
 ```javascript
-stackup.config.columnWidth = 320;
-stackup.config.gutter = 18;
-stackup.config.isFluid = false;
-
-// Currently there are two layout options: "ordinal", and "optimized"
-stackup.config.layout = "ordinal";
-stackup.config.numberOfColumns = 3;
-stackup.config.resizeDebounceDelay = 350;
+stackup.setConfig({
+  columnWidth        : 320,
+  gutter             : 18,
+  isFluid            : false,
+  layout             : 'ordinal', // ordinal, optimized
+  numberOfColumns    : 3,
+  resizeDebounceDelay: 350
+});
 
 // This function allows you to modify how each item is moved or animated.
 stackup.config.moveItem: function(item, left, top, callback) {
   item.style.left = left + "px";
-  item.style.top = top + "px";
-  // The callback function is important!
+  item.style.top  = top + "px";
+  // The callback function is needed.
   callback();
 };
 
 // This one allows you to modify how the container scales.
 stackup.config.scaleContainer: function(container, width, height, callback) {
-  container.style.width = width + "px";
+  container.style.width  = width + "px";
   container.style.height = height + "px";
-  // The callback function is important!
+  // The callback function is needed.
   callback();
 };
 ```
