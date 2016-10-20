@@ -1,6 +1,6 @@
 var license = "// licensed under the MIT license - http://opensource.org/licenses/MIT\n" +
               "// copyright (C) 2016 Andrew Prasetya\n" +
-              "// version: Thu 6 Oct 21:05:22 2016\n";
+              "// version: Thu Oct 20 04:33:40 2016\n";
 
 // gulp object declarations
 var gulp = require('gulp');

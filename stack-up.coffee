@@ -1,6 +1,6 @@
 # licensed under the MIT license - http://opensource.org/licenses/MIT
 # copyright (C) 2016 Andrew Prasetya
-# version: Thu 6 Oct 21:05:07 2016
+# version: Thu Oct 20 04:32:49 2016
 
 class @StackUp
 
@@ -181,7 +181,7 @@ class @StackUp
     itemIndex = @items.length
     @appendItem item
     if @calculateNumberOfColumns() is @numberOfColumns
-      @layoutType[stackgrid.config.layout].plot itemIndex
+      @layoutType[@config.layout].plot itemIndex
       @draw()
     else
       @restack()
