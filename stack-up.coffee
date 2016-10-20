@@ -181,7 +181,7 @@ class @StackUp
     itemIndex = @items.length
     @appendItem item
     if @calculateNumberOfColumns() is @numberOfColumns
-      @layoutType[@config.layout].plot itemIndex
+      @layout[@config.layout].plot itemIndex
       @draw()
     else
       @restack()
