@@ -2,7 +2,7 @@
 window.onload = ->
 
   stackup = new StackUp
-    columnWidth       : 220
+    columnWidth       : 240
     containerSelector : '.grid-container'
     gutter            : 18
     isFluid           : true

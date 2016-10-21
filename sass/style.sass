@@ -1,42 +1,48 @@
 @import 'bourbon/bourbon'
 @import 'reset'
 
-$font-family: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif
-$font-size: 16pt
-$gutter: 16pt
-$container-color: hsl(240, 15, 99)
+$ff: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif
+$fs: 18px
+$gutter: 20px
 
 =font-normalize
   font:
-    family: $font-family
-    size: $font-size
+    family: $ff
+    size: $fs
 
 body
   +font-normalize
-  background: hsl(220, 15, 90)
+  background: hsl(0, 0, 96)
   text-align: center
 
 a:link, a:visited
   text-decoration: none
 
+$header-height: 72px
 .header
-  margin: $gutter * 3 0
+  background: hsl(0, 0, 94)
+  display: block
+  height: $header-height
+  margin-bottom: $gutter
 
-  h1 > a:link, a:visited
-    color: $container-color
+  h1
+    color: hsl(0, 0, 72)
+    display: block
     font:
-      size: $font-size * 1.5
+      size: $fs
       weight: 600
-    border-bottom: 4pt solid $container-color
+    letter-spacing: 2px
+    line-height: $header-height
+    text:
+      transform: uppercase
 
 .content
   height: auto
-  margin: $gutter / 2 0
   overflow: hidden
   width: 100%
 
 .grid-container
-  background: $container-color
+  background: hsl(0, 0, 98)
   margin: 0 auto
   margin-bottom: $gutter * 2
   position: relative

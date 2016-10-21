@@ -38,12 +38,12 @@ gulp.task('coffee', function() {
 });
 
 gulp.task('sass', function() {
-  gulp.src('example/sass/*.sass')
+  gulp.src('./sass/*.sass')
     .pipe(sass(sassConfig).on('error', util.log))
-    .pipe(gulp.dest('example/css'));
+    .pipe(gulp.dest('./css'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('example/sass/*.sass', ['sass']);
+  gulp.watch('./sass/*.sass', ['sass']);
   gulp.watch('./*.coffee', ['coffee']);
 });
