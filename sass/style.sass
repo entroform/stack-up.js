@@ -26,15 +26,25 @@ $header-height: 72px
   margin-bottom: $gutter
 
   h1
-    color: hsl(0, 0, 72)
-    display: block
-    font:
-      size: $fs
-      weight: 600
-    letter-spacing: 2px
-    line-height: $header-height
     text:
-      transform: uppercase
+      align: center
+
+    a:link,
+    a:visited
+      color: hsl(0, 0, 72)
+      display: block
+      font:
+        size: $fs
+        weight: 600
+      letter-spacing: 2px
+      line-height: $header-height
+      text:
+        transform: uppercase
+
+      &:hover
+        color: hsl(0, 0, 72)
+        text:
+          decoration: none
 
 .content
   height: auto
