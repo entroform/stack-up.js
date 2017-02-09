@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+gem install bourbon
+(
+  cd assets/sass
+  bourbon install
+)

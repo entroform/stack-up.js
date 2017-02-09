@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+coffee -wco assets/javascripts assets/coffee

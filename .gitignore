@@ -1,3 +1,5 @@
-**/bourbon/**
 .DS_Store
-**/node_modules/**
+.git/
+.sass-cached/
+bourbon/
+node_modules/

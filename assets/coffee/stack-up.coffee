@@ -4,14 +4,14 @@
 
 class @StackUp
 
-  boundaryHeight  : 0
-  boundaryWidth   : 0
-  containerElement: undefined
-  containerHeight : 0
-  containerWidth  : 0
-  itemElements    : undefined
-  items           : [] # format: [index][item, itemHeight, left, top]
-  numberOfColumns : 0
+  boundaryHeight : 0
+  boundaryWidth  : 0
+  containerEl    : undefined
+  containerHeight: 0
+  containerWidth : 0
+  itemEls        : undefined
+  items          : [] # format: [index][item, itemHeight, left, top]
+  numberOfColumns: 0
 
   config:
     boundary           : window
@@ -45,7 +45,7 @@ class @StackUp
     window.addEventListener 'resize', @resizeHandler
     @boundaryUpdate()
     # update grid selectors - reset
-    @updateSelectors()
+    @getEls()
     @populateItems()
     # update grid selectors - stacking
     @updateNumberOfColumns()
@@ -80,11 +80,11 @@ class @StackUp
     @resizeDebounce @resizeComplete, @config.resizeDebounceDelay
     this
 
-  # update grid selectors. (1) - reset
+  # Update grid selectors. (1) - reset
   # required stack-up.initialize to be called first.
-  updateSelectors: ->
-    @containerElement = document.querySelector @config.containerSelector
-    @itemElements     = document.querySelectorAll "#{@config.containerSelector} > #{@config.itemsSelector}"
+  getEls: ->
+    @containerEl = document.querySelector @config.containerSelector
+    @itemEls     = document.querySelectorAll "#{@config.containerSelector} > #{@config.itemsSelector}"
     this
 
   # this only updates @items, it does not update the selectors
@@ -97,7 +97,7 @@ class @StackUp
   populateItems: ->
     # clear items before populating
     @items = []
-    @appendItem item for item, index in @itemElements
+    @appendItem item for item, index in @itemEls
     this
 
   calculateNumberOfColumns: ->
@@ -119,7 +119,7 @@ class @StackUp
     @containerWidth = (@config.columnWidth + @config.gutter) * @numberOfColumns
     height          = @containerHeight + @config.gutter
     width           = @containerWidth + @config.gutter
-    @config.scaleContainer @containerElement, width, height, =>
+    @config.scaleContainer @containerEl, width, height, =>
       callback = ->
       @config.moveItem item[0], item[2], item[3], callback for item, index in @items
     this
@@ -169,12 +169,12 @@ class @StackUp
     @layout.columnPointer = 0
     this
 
-  # this should be called when any of the item(s) are being modified, added, or removed
+  # This should be called when any of the item(s) are being modified, added, or removed
   reset: ->
     @containerWidth  = 0
     @containerHeight = 0
     @items           = []
-    @updateSelectors().populateItems().resetLayout().restack()
+    @getEls().populateItems().resetLayout().restack()
     this
 
   append: (item, callback) ->
