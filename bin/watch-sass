@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+sass --watch assets/sass:assets/stylesheets --style compressed

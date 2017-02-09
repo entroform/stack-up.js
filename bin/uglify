@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+uglifyjs assets/javascripts/stack-up.js -c -m -o assets/javascripts/stack-up.min.js
