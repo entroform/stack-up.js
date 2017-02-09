@@ -1,9 +1,9 @@
-@import 'bourbon/bourbon'
-@import 'reset'
+@import bourbon/bourbon
+@import reset
 
 $ff: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif
 $fs: 18px
-$gutter: 20px
+$dg: 20px
 
 =font-normalize
   font:
@@ -23,11 +23,10 @@ $header-height: 72px
   background: hsl(0, 0, 94)
   display: block
   height: $header-height
-  margin-bottom: $gutter
+  margin-bottom: $dg
 
   h1
-    text:
-      align: center
+    text-align: center
 
     a:link,
     a:visited
@@ -38,13 +37,11 @@ $header-height: 72px
         weight: 400
       letter-spacing: 2px
       line-height: $header-height
-      text:
-        transform: uppercase
+      text-transform: uppercase
 
       &:hover
         color: hsl(0, 0, 72)
-        text:
-          decoration: none
+        text-decoration: none
 
 .content
   height: auto
@@ -54,7 +51,7 @@ $header-height: 72px
 .grid-container
   background: hsl(0, 0, 98)
   margin: 0 auto
-  margin-bottom: $gutter * 2
+  margin-bottom: $dg * 2
   position: relative
 
 .grid-item
