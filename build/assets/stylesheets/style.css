@@ -1,0 +1,101 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  background: whitesmoke;
+  text-align: center; }
+
+a:link, a:visited {
+  text-decoration: none; }
+
+.rowHeader {
+  background: #f2f2f2;
+  display: block;
+  height: 72px;
+  margin-bottom: 20px; }
+  .rowHeader h1 {
+    text-align: center; }
+    .rowHeader h1 a:link,
+    .rowHeader h1 a:visited {
+      color: #b8b8b8;
+      display: block;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 72px;
+      text-transform: uppercase; }
+      .rowHeader h1 a:link:hover,
+      .rowHeader h1 a:visited:hover {
+        color: #b8b8b8;
+        text-decoration: none; }
+
+.rowContent {
+  height: auto;
+  overflow: hidden;
+  width: 100%; }
+
+.boundary {
+  margin: 0 auto;
+  margin-bottom: 40px;
+  max-width: 1140px;
+  position: relative;
+  width: 100%; }
+
+.gridContainer {
+  background: #fafafa;
+  margin: 0 auto;
+  position: relative; }
+
+.gridItem {
+  display: inline-block;
+  font-size: 0;
+  position: absolute; }
+  .gridItem img {
+    display: block;
+    width: 100%; }

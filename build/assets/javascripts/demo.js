@@ -1,0 +1,1 @@
+(function(){window.onload=function(){var t,i;return t=document.querySelector(".boundary"),i=new StackUp({boundaryEl:t,columnWidth:240,containerSelector:".gridContainer",gutter:18,isFluid:!0,itemsSelector:".gridItem",layout:"optimized"}),i.initialize()}}).call(this);

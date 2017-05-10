@@ -4,14 +4,14 @@ A simple and fast JavaScript plugin to help you create fixed-width, variable-hei
 
 ## Getting started
 
-First, include _stack-up.js_ in your project.
+First, include _stack-up.js_ to your project.
 
 ```html
 <!-- Example HTML -->
-<div id="grid-container">
-  <div class="grid-item">...</div>
-  <div class="grid-item">...</div>
-  <div class="grid-item">...</div>
+<div id="gridContainer">
+  <div class="gridItem">...</div>
+  <div class="gridItem">...</div>
+  <div class="gridItem">...</div>
 </div>
 
 <!-- Scripts -->
@@ -21,15 +21,15 @@ First, include _stack-up.js_ in your project.
 ### Minimum CSS requirements
 
 ```css
-#grid-container {
+#gridContainer {
   position: relative;
 }
 
-.grid-item {
+.gridItem {
   position: absolute;
 }
 
-.grid-item img {
+.gridItem img {
   width: 100%;
 }
 ```
@@ -45,8 +45,8 @@ window.onload = function() {
 
   // Create a stackup object.
   var stackup = new StackUp({
-    containerSelector: "#grid-container",
-    itemsSelector    : "#grid-container > .grid-item",
+    containerSelector: "#gridContainer",
+    itemsSelector    : "#gridContainer > .gridItem",
     columnWidth      : 240,
   });
   // Initialize stackup.
@@ -113,11 +113,11 @@ The `append` method allows you to add a new grid item without re-calculating eve
 
 ```javascript
 // Get container element.
-var gridContainer = document.getElementById("grid-container");
+var gridContainer = document.getElementById("gridContainer");
 
 // Create a new grid item element.
 var gridItem = document.createElement("div");
-gridItem.setAttribute("class", "grid-item");
+gridItem.setAttribute("class", "gridItem");
 gridItem.innerHTML = "blah blah";
 
 // Append the new grid item element into container element.
@@ -135,4 +135,4 @@ That's it!
 
 StackUp is licensed under the MIT license - http://opensource.org/licenses/MIT
 
-Copyright (C) 2016 Andrew Prasetya
+Copyright (C) 2017 Andrew Prasetya

@@ -1,12 +1,15 @@
 # document.addEventListener 'DOMContentLoaded' is buggy on safari..
 window.onload = ->
 
+  boundaryEl = document.querySelector '.boundary'
+
   stackup = new StackUp
+    boundaryEl        : boundaryEl
     columnWidth       : 240
-    containerSelector : '.grid-container'
+    containerSelector : '.gridContainer'
     gutter            : 18
     isFluid           : true
-    itemsSelector     : '.grid-item'
+    itemsSelector     : '.gridItem'
     layout            : 'optimized'
 
   stackup.initialize()

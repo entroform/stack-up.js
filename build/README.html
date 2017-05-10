@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h1 id="stack-up.js">stack-up.js</h1>
+
+<p>A simple and fast JavaScript plugin to help you create fixed-width, variable-height grid layout.</p>
+
+<h2 id="gettingstarted">Getting started</h2>
+
+<p>First, include <em>stack-up.js</em> to your project.</p>
+
+<pre><code class="html">&lt;!-- Example HTML --&gt;
+&lt;div id=&quot;gridContainer&quot;&gt;
+  &lt;div class=&quot;gridItem&quot;&gt;...&lt;/div&gt;
+  &lt;div class=&quot;gridItem&quot;&gt;...&lt;/div&gt;
+  &lt;div class=&quot;gridItem&quot;&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Scripts --&gt;
+&lt;script src=&quot;js/stack-up.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<h3 id="minimumcssrequirements">Minimum CSS requirements</h3>
+
+<pre><code class="css">#gridContainer {
+  position: relative;
+}
+
+.gridItem {
+  position: absolute;
+}
+
+.gridItem img {
+  width: 100%;
+}
+</code></pre>
+
+<p>Make sure all content inside the container are loaded before initializing stack-up.
+This is to make sure stack-up calculates the right height before plotting.</p>
+
+<pre><code class="javascript">
+// One way to make sure everything is loaded is
+// to wrap the initializer inside window onload.
+window.onload = function() {
+
+  // Create a stackup object.
+  var stackup = new StackUp({
+    containerSelector: &quot;#gridContainer&quot;,
+    itemsSelector    : &quot;#gridContainer &gt; .gridItem&quot;,
+    columnWidth      : 240,
+  });
+  // Initialize stackup.
+  stackup.initialize();
+
+};
+</code></pre>
+
+<h2 id="config">Config</h2>
+
+<p>Customize stack-up to your needs.</p>
+
+<pre><code class="javascript">stackup.setConfig({
+  columnWidth        : 320,
+  gutter             : 18,
+  isFluid            : false,
+  layout             : &quot;ordinal&quot;, // ordinal, optimized
+  numberOfColumns    : 3,
+  resizeDebounceDelay: 350
+});
+
+// This function allows you to modify how each item is moved or animated.
+stackup.config.moveItem: function(item, left, top, callback) {
+  item.style.left = left + &quot;px&quot;;
+  item.style.top  = top + &quot;px&quot;;
+  // The callback function is required to continue operation.
+  callback();
+};
+
+// This one allows you to modify how the container scales.
+stackup.config.scaleContainer: function(container, width, height, callback) {
+  container.style.width  = width + &quot;px&quot;;
+  container.style.height = height + &quot;px&quot;;
+  // The callback function is required to continue operation.
+  callback();
+};
+</code></pre>
+
+<h2 id="resetandrestack">Reset and restack</h2>
+
+<p>Once the grid is initialized; you will need to call the <code>restack</code> method if you change any of the configurations.</p>
+
+<pre><code class="javascript">
+stackup.config.layout = 'optimized';
+stackup.restack();
+</code></pre>
+
+<p>The <code>restack</code> method will not work properly if you change something that affect the dimensions of the grid item.
+You will have to use <code>reset</code> instead. (This recalculates the grid stacking from top to bottom.)</p>
+
+<pre><code class="javascript">stackup.config.columnWidth = 220;
+stackup.reset();
+</code></pre>
+
+<p>You will also need to use the <code>reset</code> method if you add or remove any grid item.</p>
+
+<h2 id="append">Append</h2>
+
+<p>The <code>append</code> method allows you to add a new grid item without re-calculating everything.</p>
+
+<pre><code class="javascript">// Get container element.
+var gridContainer = document.getElementById(&quot;gridContainer&quot;);
+
+// Create a new grid item element.
+var gridItem = document.createElement(&quot;div&quot;);
+gridItem.setAttribute(&quot;class&quot;, &quot;gridItem&quot;);
+gridItem.innerHTML = &quot;blah blah&quot;;
+
+// Append the new grid item element into container element.
+gridContainer.appendChild(gridItem);
+
+// Append it to stackup.
+stackup.append(gridItem);
+</code></pre>
+
+<p>There is currently no <code>prepend</code> method.</p>
+
+<p>That&#8217;s it!</p>
+
+<h2 id="license">License</h2>
+
+<p>StackUp is licensed under the MIT license - http://opensource.org/licenses/MIT</p>
+
+<p>Copyright (C) 2017 Andrew Prasetya</p>
+
+</body>
+</html>

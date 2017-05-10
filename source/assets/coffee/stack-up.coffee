@@ -1,6 +1,6 @@
 # licensed under the MIT license - http://opensource.org/licenses/MIT
-# copyright (C) 2016 Andrew Prasetya
-# version: Thu Oct 20 04:32:49 2016
+# copyright (C) 2017 Andrew Prasetya
+# version: 2017-05-10
 
 class @StackUp
 
@@ -14,7 +14,7 @@ class @StackUp
   numberOfColumns: 0
 
   config:
-    boundary           : window
+    boundaryEl         : window
     columnWidth        : 320
     containerSelector  : undefined
     gutter             : 18
@@ -54,12 +54,12 @@ class @StackUp
     this
 
   boundaryUpdate: ->
-    if @config.boundary isnt window
-      style = @config.boundary.currentStyle || window.getComputedStyle(@config.boundary)
+    if @config.boundaryEl isnt window
+      style = @config.boundaryEl.currentStyle || window.getComputedStyle(@config.boundaryEl)
       horizontalPaddings = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight)
       verticalPaddings   = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom)
-      @boundaryHeight    = @config.boundary.offsetHeight - verticalPaddings
-      @boundaryWidth     = @config.boundary.offsetWidth - horizontalPaddings
+      @boundaryHeight    = @config.boundaryEl.offsetHeight - verticalPaddings
+      @boundaryWidth     = @config.boundaryEl.offsetWidth - horizontalPaddings
     else
       @boundaryHeight = window.innerHeight
       @boundaryWidth  = window.innerWidth

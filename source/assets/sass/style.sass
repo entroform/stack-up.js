@@ -1,4 +1,4 @@
-@import bourbon/bourbon
+@import bourbon
 @import reset
 
 $ff: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif
@@ -18,11 +18,11 @@ body
 a:link, a:visited
   text-decoration: none
 
-$header-height: 72px
-.header
-  background: hsl(0, 0, 94)
+$headerHeight: 72px
+.rowHeader
+  background: hsl(0, 0, 95)
   display: block
-  height: $header-height
+  height: $headerHeight
   margin-bottom: $dg
 
   h1
@@ -36,29 +36,35 @@ $header-height: 72px
         size: $fs
         weight: 400
       letter-spacing: 2px
-      line-height: $header-height
+      line-height: $headerHeight
       text-transform: uppercase
 
       &:hover
         color: hsl(0, 0, 72)
         text-decoration: none
 
-.content
+.rowContent
   height: auto
   overflow: hidden
   width: 100%
 
-.grid-container
+.boundary
+  margin: 0 auto
+  margin-bottom: 40px
+  max-width: 1140px
+  position: relative
+  width: 100%
+
+.gridContainer
   background: hsl(0, 0, 98)
   margin: 0 auto
-  margin-bottom: $dg * 2
   position: relative
 
-.grid-item
+.gridItem
   display: inline-block
   font-size: 0
   position: absolute
 
-.grid-item img
-  display: block
-  width: 100%
+  img
+    display: block
+    width: 100%
